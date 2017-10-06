@@ -2,10 +2,15 @@ module string_mod
 
   implicit none
 
+  private
+
+  public to_string
+
   interface to_string
     module procedure integer_to_string
     module procedure real4_to_string
     module procedure real8_to_string
+    module procedure logical_to_string
   end interface to_string
 
 contains
@@ -65,5 +70,14 @@ contains
     end if
 
   end function real8_to_string
+
+  function logical_to_string(x) result(res)
+
+    logical, intent(in) :: x
+    character(5), allocatable :: res
+
+    res = merge('true ', 'false', x)
+
+  end function logical_to_string
 
 end module string_mod

@@ -31,10 +31,7 @@ contains
     integer, intent(in) :: x
     integer, intent(in) :: y
 
-    if (x /= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
 
   end subroutine assert_equal_integer
 
@@ -43,10 +40,7 @@ contains
     real(4), intent(in) :: x
     real(4), intent(in) :: y
 
-    if (x /= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
 
   end subroutine assert_equal_real4
 
@@ -55,10 +49,7 @@ contains
     real(8), intent(in) :: x
     real(8), intent(in) :: y
 
-    if (x /= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
 
   end subroutine assert_equal_real8
 
@@ -67,10 +58,7 @@ contains
     character(*), intent(in) :: x
     character(*), intent(in) :: y
 
-    if (trim(x) /= trim(y)) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(x) // ') /= y (' // trim(y) // ') failed!')
-    end if
+    call test_case_append_assert('==', trim(x) == trim(y), x, y)
 
   end subroutine assert_equal_string
 
@@ -80,10 +68,7 @@ contains
     real(4), intent(in) :: y
     real(4), intent(in), optional :: eps
 
-    if (abs(x-y) > merge(eps, 1.0e-10, present(eps))) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') =~ y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0e-10, present(eps)), to_string(x), to_string(y))
 
   end subroutine assert_approximate_real4
 
@@ -93,10 +78,7 @@ contains
     real(8), intent(in) :: y
     real(8), intent(in), optional :: eps
 
-    if (abs(x-y) > merge(eps, 1.0d-10, present(eps))) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') =~ y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0d-10, present(eps)), to_string(x), to_string(y))
 
   end subroutine assert_approximate_real8
 
@@ -105,10 +87,7 @@ contains
     integer, intent(in) :: x
     integer, intent(in) :: y
 
-    if (x <= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
 
   end subroutine assert_great_than_integer
 
@@ -117,10 +96,7 @@ contains
     real(4), intent(in) :: x
     real(4), intent(in) :: y
 
-    if (x <= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
 
   end subroutine assert_great_than_real4
 
@@ -129,10 +105,7 @@ contains
     real(8), intent(in) :: x
     real(8), intent(in) :: y
 
-    if (x <= y) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: ' // &
-        'x (' // trim(to_string(x)) // ') /= y (' // trim(to_string(y)) // ') failed!')
-    end if
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
 
   end subroutine assert_great_than_real8
 
@@ -140,9 +113,7 @@ contains
 
     logical, intent(in) :: x
 
-    if (.not. x) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: x is false!')
-    end if
+    call test_case_append_assert('true', x, to_string(x))
 
   end subroutine assert_true
 
@@ -150,9 +121,7 @@ contains
 
     logical, intent(in) :: x
 
-    if (x) then
-      call log_error('Test case: ' // curr_test_case%name, 'Reason: x is true!')
-    end if
+    call test_case_append_assert('false', .not. x, to_string(x))
 
   end subroutine assert_false
 

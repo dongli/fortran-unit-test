@@ -8,6 +8,9 @@ module log_mod
 
   public log_error
   public log_table
+  public log_header
+  public log_err_unit
+  public log_out_unit
 
   integer :: log_err_unit = 0
   integer :: log_out_unit = 6
@@ -27,7 +30,7 @@ contains
     !write(log_err_unit, *) '[Error]: ', trim(caller), ': ', trim(message)
     !stop 1
 
-    call log_header(log_err_unit, 'ERROR')
+    ! call log_header(log_err_unit, 'ERROR')
     write(log_err_unit, *) trim(caller), ': '
     write(log_err_unit, *)
     write(log_err_unit, *) trim(message)

@@ -7,7 +7,6 @@ project (FortranUnitTest Fortran)
 set (version 0.0.1)
  
 set (CMAKE_Fortran_FLAGS "-ffree-line-length-none")
-set (CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
 
 set (sources
   "${PROJECT_SOURCE_DIR}/src/string_mod.F90"
@@ -31,11 +30,9 @@ install (TARGETS fortran_unit_test EXPORT FortranUnitTestTargets
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
-install (
-  DIRECTORY
-    ${CMAKE_Fortran_MODULE_DIRECTORY}/
-    DESTINATION include/fortran_unit_test
-)
+
+file (GLOB mods "${CMAKE_BINARY_DIR}/*.mod")
+install (FILES ${mods} DESTINATION include/fortran_unit_test)
 
 include (CMakePackageConfigHelpers)
 write_basic_package_version_file (
