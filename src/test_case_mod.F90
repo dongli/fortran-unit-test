@@ -32,11 +32,11 @@ module test_case_mod
   end type test_case_type
 
   type test_suite_type
-      character(256) :: name = "A test suite"
-      integer :: num_test_case = 0
-      type(test_case_type), pointer :: test_case_head => null()
-      type(test_case_type), pointer :: test_case_tail => null()
-      type(test_case_type), pointer :: curr_test_case => null()
+    character(256) :: name = "A test suite"
+    integer :: num_test_case = 0
+    type(test_case_type), pointer :: test_case_head => null()
+    type(test_case_type), pointer :: test_case_tail => null()
+    type(test_case_type), pointer :: curr_test_case => null()
   end type test_suite_type
 
   type(test_suite_type), target, private :: default_test_suite
@@ -50,43 +50,45 @@ contains
   end subroutine test_case_init
 
   subroutine test_case_final(suite)
-      type(test_suite_type), optional, target :: suite
-      type(test_suite_type), pointer :: dummy_suite
-      type(test_case_type), pointer :: test_case1, test_case2
-      type(assert_result_type), pointer :: assert_result1, assert_result2
 
-      ! if no suite parameter was passed, use default test suite
-      if( present(suite) ) then
-          dummy_suite => suite
-      else
-          dummy_suite => default_test_suite
-      end if
+    type(test_suite_type), optional, target :: suite
+    type(test_suite_type), pointer :: dummy_suite
+    type(test_case_type), pointer :: test_case1, test_case2
+    type(assert_result_type), pointer :: assert_result1, assert_result2
 
-      test_case1 => dummy_suite%test_case_head
-      do while (associated(test_case1))
-          test_case2 => test_case1%next
-          assert_result1 => test_case1%assert_result_head
-          do while (associated(assert_result1))
-              assert_result2 => assert_result1%next
-              deallocate(assert_result1)
-              assert_result1 => assert_result2
-          end do
-          deallocate(test_case1)
-          test_case1 => test_case2
+    ! if no suite parameter was passed, use default test suite
+    if( present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+
+    test_case1 => dummy_suite%test_case_head
+    do while (associated(test_case1))
+      test_case2 => test_case1%next
+      assert_result1 => test_case1%assert_result_head
+      do while (associated(assert_result1))
+        assert_result2 => assert_result1%next
+        deallocate(assert_result1)
+        assert_result1 => assert_result2
       end do
+      deallocate(test_case1)
+      test_case1 => test_case2
+    end do
 
   end subroutine test_case_final
 
   subroutine test_case_create(name, suite)
+
     character(*), intent(in) :: name
     type(test_suite_type), target, optional :: suite
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
     if( present(suite) ) then
-        dummy_suite => suite
+      dummy_suite => suite
     else
-        dummy_suite => default_test_suite
+      dummy_suite => default_test_suite
     end if
 
     if (.not. associated(dummy_suite%test_case_head)) then
@@ -104,6 +106,7 @@ contains
   end subroutine test_case_create
 
   subroutine test_case_report(name, suite)
+
     character(*), intent(in) :: name
     type(test_suite_type), optional, target :: suite
     type(test_suite_type), pointer :: dummy_suite
@@ -112,9 +115,9 @@ contains
 
     ! if no suite parameter was passed, use default test suite
     if( present(suite) ) then
-        dummy_suite => suite
+      dummy_suite => suite
     else
-        dummy_suite => default_test_suite
+      dummy_suite => default_test_suite
     end if
 
     test_case => get_test_case(name, suite)
@@ -153,9 +156,9 @@ contains
 
     ! if no suite parameter was passed, use default test suite
     if( present(suite) ) then
-        dummy_suite => suite
+      dummy_suite => suite
     else
-        dummy_suite => default_test_suite
+      dummy_suite => default_test_suite
     end if
 
     if (.not. associated(dummy_suite%curr_test_case%assert_result_head)) then
@@ -176,6 +179,7 @@ contains
   end subroutine test_case_append_assert
 
   function get_test_case(name, suite) result(res)
+
     integer i
     character(*), intent(in) :: name
     type(test_case_type), pointer :: res
@@ -184,9 +188,9 @@ contains
 
     ! if no suite parameter was passed, use default test suite
     if( present(suite) ) then
-        dummy_suite => suite
+      dummy_suite => suite
     else
-        dummy_suite => default_test_suite
+      dummy_suite => default_test_suite
     end if
 
     res => dummy_suite%test_case_head
