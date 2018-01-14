@@ -36,7 +36,6 @@ module test_case_mod
     integer :: num_test_case = 0
     type(test_case_type), pointer :: test_case_head => null()
     type(test_case_type), pointer :: test_case_tail => null()
-    type(test_case_type), pointer :: curr_test_case => null()
   end type test_suite_type
 
   type(test_suite_type), target, private :: default_test_suite
@@ -72,9 +71,11 @@ contains
         deallocate(assert_result1)
         assert_result1 => assert_result2
       end do
+      nullify(test_case1%assert_result_tail)
       deallocate(test_case1)
       test_case1 => test_case2
     end do
+    nullify(dummy_suite%test_case_tail)
 
   end subroutine test_case_final
 
@@ -99,7 +100,6 @@ contains
       dummy_suite%test_case_tail => dummy_suite%test_case_tail%next
     end if
     dummy_suite%test_case_tail%name = name
-    dummy_suite%curr_test_case => dummy_suite%test_case_tail
 
     dummy_suite%num_test_case = dummy_suite%num_test_case + 1
 
@@ -161,20 +161,20 @@ contains
       dummy_suite => default_test_suite
     end if
 
-    if (.not. associated(dummy_suite%curr_test_case%assert_result_head)) then
-      allocate(dummy_suite%curr_test_case%assert_result_head)
-      dummy_suite%curr_test_case%assert_result_tail => dummy_suite%curr_test_case%assert_result_head
+    if (.not. associated(dummy_suite%test_case_tail%assert_result_head)) then
+      allocate(dummy_suite%test_case_tail%assert_result_head)
+      dummy_suite%test_case_tail%assert_result_tail => dummy_suite%test_case_tail%assert_result_head
     else
-      allocate(dummy_suite%curr_test_case%assert_result_tail%next)
-      dummy_suite%curr_test_case%assert_result_tail => dummy_suite%curr_test_case%assert_result_tail%next
+      allocate(dummy_suite%test_case_tail%assert_result_tail%next)
+      dummy_suite%test_case_tail%assert_result_tail => dummy_suite%test_case_tail%assert_result_tail%next
     end if
-    dummy_suite%curr_test_case%assert_result_tail%assert_operator = assert_operator
-    dummy_suite%curr_test_case%assert_result_tail%passed = passed
-    dummy_suite%curr_test_case%assert_result_tail%left_operand = left_operand
-    if (present(right_operand)) dummy_suite%curr_test_case%assert_result_tail%right_operand = right_operand
-    dummy_suite%curr_test_case%num_assert = dummy_suite%curr_test_case%num_assert + 1
-    if (passed) dummy_suite%curr_test_case%num_succeed_assert = dummy_suite%curr_test_case%num_succeed_assert + 1
-    dummy_suite%curr_test_case%assert_result_tail%id = dummy_suite%curr_test_case%num_assert
+    dummy_suite%test_case_tail%assert_result_tail%assert_operator = assert_operator
+    dummy_suite%test_case_tail%assert_result_tail%passed = passed
+    dummy_suite%test_case_tail%assert_result_tail%left_operand = left_operand
+    if (present(right_operand)) dummy_suite%test_case_tail%assert_result_tail%right_operand = right_operand
+    dummy_suite%test_case_tail%num_assert = dummy_suite%test_case_tail%num_assert + 1
+    if (passed) dummy_suite%test_case_tail%num_succeed_assert = dummy_suite%test_case_tail%num_succeed_assert + 1
+    dummy_suite%test_case_tail%assert_result_tail%id = dummy_suite%test_case_tail%num_assert
 
   end subroutine test_case_append_assert
 
