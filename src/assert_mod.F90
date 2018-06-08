@@ -15,6 +15,9 @@ module assert_mod
     module procedure assert_equal_real4_vec
     module procedure assert_equal_real8_vec
     module procedure assert_equal_string_vec
+    module procedure assert_equal_integer_array
+    module procedure assert_equal_real4_array
+    module procedure assert_equal_real8_array
   end interface assert_equal
 
   interface assert_approximate
@@ -22,6 +25,8 @@ module assert_mod
     module procedure assert_approximate_real8
     module procedure assert_approximate_real4_vec
     module procedure assert_approximate_real8_vec
+    module procedure assert_approximate_real4_array
+    module procedure assert_approximate_real8_array
   end interface assert_approximate
 
   interface assert_great_than
@@ -83,7 +88,7 @@ contains
         passed = .false.
         if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
             do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
+                if(.not. x(i) == y(i)) then
                     loc = i
                     exit
                 end if
@@ -110,7 +115,7 @@ contains
         passed = .false.
         if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
             do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
+                if(.not. x(i) == y(i)) then
                     loc = i
                     exit
                 end if
@@ -137,7 +142,7 @@ contains
         passed = .false.
         if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
             do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
+                if(.not. x(i) == y(i)) then
                     loc = i
                     exit
                 end if
@@ -164,7 +169,7 @@ contains
         passed = .false.
         if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
             do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
+                if(.not. x(i) == y(i)) then
                     loc = i
                     exit
                 end if
@@ -174,7 +179,94 @@ contains
  
     call test_case_append_assert('==', passed, x(loc), y(loc))
  
-  end subroutine assert_equal_string_vec 
+  end subroutine assert_equal_string_vec
+  
+  subroutine assert_equal_integer_array(x, y)
+ 
+    integer, intent(in) :: x(:, :)
+    integer, intent(in) :: y(:, :)
+    
+    logical				:: passed
+    integer				:: loc_i, loc_j, i, j
+    
+    passed = .true.
+	loc_i = lbound(x, 1)
+	loc_j = lbound(x, 2)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+        do i = lbound(x, 1), ubound(x, 1)
+			do j = lbound(x, 2), ubound(x, 2)
+				if (.not. x(i, j) == y(i, j)) then
+				    loc_i = i
+					loc_j = j
+					passed = .false.
+				    exit
+				end if
+			end do
+        end do
+    end	if
+ 
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+ 
+  end subroutine assert_equal_integer_array
+  
+  subroutine assert_equal_real4_array(x, y)
+ 
+    real(4), intent(in) :: x(:, :)
+    real(4), intent(in) :: y(:, :)
+    
+    logical				:: passed
+    integer				:: loc_i, loc_j, i, j
+    
+    passed = .true.
+	loc_i = lbound(x, 1)
+	loc_j = lbound(x, 2)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+        do i = lbound(x, 1), ubound(x, 1)
+			do j = lbound(x, 2), ubound(x, 2)
+				if (.not. x(i, j) == y(i, j)) then
+				    loc_i = i
+					loc_j = j
+					passed = .false.
+				    exit
+				end if
+			end do
+        end do
+    end	if
+ 
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+ 
+  end subroutine assert_equal_real4_array
+  
+  subroutine assert_equal_real8_array(x, y)
+ 
+    real(8), intent(in) :: x(:, :)
+    real(8), intent(in) :: y(:, :)
+    
+    logical				:: passed
+    integer				:: loc_i, loc_j, i, j
+    
+    passed = .true.
+	loc_i = lbound(x, 1)
+	loc_j = lbound(x, 2)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+        do i = lbound(x, 1), ubound(x, 1)
+			do j = lbound(x, 2), ubound(x, 2)
+				if (.not. x(i, j) == y(i, j)) then
+				    loc_i = i
+					loc_j = j
+					passed = .false.
+				    exit
+				end if
+			end do
+        end do
+    end	if
+ 
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+ 
+  end subroutine assert_equal_real8_array
 
   subroutine assert_approximate_real4(x, y, eps)
 
@@ -204,20 +296,17 @@ contains
     
     logical				:: passed
     integer				:: loc, i
-    
-    if (all(abs(x - y) < merge(eps, 1.0d-10, present(eps)))) then 
-        passed = .true.
-        loc = lbound(x, 1)
-    else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+
+	passed = .true.
+	loc = lbound(x, 1)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+            if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+                loc = i
+				passed = .false.
+                exit
+            end if
+        end do
     end	if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
@@ -233,24 +322,81 @@ contains
     logical				:: passed
     integer				:: loc, i
     
-    if (all(abs(x - y) < merge(eps, 1.0d-10, present(eps)))) then 
-        passed = .true.
-        loc = lbound(x, 1)
-    else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(x(i) /= y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+    passed = .true.
+	loc = lbound(x, 1)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+            if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+                loc = i
+				passed = .false.
+                exit
+            end if
+        end do
     end	if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
  
   end subroutine assert_approximate_real8_vec
+  
+  subroutine assert_approximate_real4_array(x, y, eps)
+ 
+    real(4), intent(in) :: x(:, :)
+    real(4), intent(in) :: y(:, :)
+    real(4), intent(in), optional :: eps
+    
+    logical				:: passed
+    integer				:: loc_i, loc_j, i, j
+    
+    passed = .true.
+	loc_i = lbound(x, 1)
+	loc_j = lbound(x, 2)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+        do i = lbound(x, 1), ubound(x, 1)
+			do j = lbound(x, 2), ubound(x, 2)
+				if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+				    loc_i = i
+					loc_j = j
+					passed = .false.
+				    exit
+				end if
+			end do
+        end do
+    end	if
+ 
+    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+ 
+  end subroutine assert_approximate_real4_array
+  
+  subroutine assert_approximate_real8_array(x, y, eps)
+ 
+    real(8), intent(in) :: x(:, :)
+    real(8), intent(in) :: y(:, :)
+    real(8), intent(in), optional :: eps
+    
+    logical				:: passed
+    integer				:: loc_i, loc_j, i, j
+    
+    passed = .true.
+	loc_i = lbound(x, 1)
+	loc_j = lbound(x, 2)
+	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+        do i = lbound(x, 1), ubound(x, 1)
+			do j = lbound(x, 2), ubound(x, 2)
+				if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+				    loc_i = i
+					loc_j = j
+					passed = .false.
+				    exit
+				end if
+			end do
+        end do
+    end	if
+ 
+    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+ 
+  end subroutine assert_approximate_real8_array
 
   subroutine assert_great_than_integer(x, y)
 
