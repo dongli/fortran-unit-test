@@ -190,19 +190,19 @@ contains
     integer				:: loc_i, loc_j, i, j
     
     passed = .true.
-	loc_i = lbound(x, 1)
-	loc_j = lbound(x, 2)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+    loc_i = lbound(x, 1)
+    loc_j = lbound(x, 2)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
         do i = lbound(x, 1), ubound(x, 1)
-			do j = lbound(x, 2), ubound(x, 2)
-				if (.not. x(i, j) == y(i, j)) then
-				    loc_i = i
-					loc_j = j
-					passed = .false.
-				    exit
-				end if
-			end do
+            do j = lbound(x, 2), ubound(x, 2)
+                if (.not. x(i, j) == y(i, j)) then
+                    loc_i = i
+                    loc_j = j
+                    passed = .false.
+                    exit
+                end if
+            end do
         end do
     end	if
  
@@ -219,19 +219,19 @@ contains
     integer				:: loc_i, loc_j, i, j
     
     passed = .true.
-	loc_i = lbound(x, 1)
-	loc_j = lbound(x, 2)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+    loc_i = lbound(x, 1)
+    loc_j = lbound(x, 2)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
         do i = lbound(x, 1), ubound(x, 1)
-			do j = lbound(x, 2), ubound(x, 2)
-				if (.not. x(i, j) == y(i, j)) then
-				    loc_i = i
-					loc_j = j
-					passed = .false.
-				    exit
-				end if
-			end do
+            do j = lbound(x, 2), ubound(x, 2)
+                if (.not. x(i, j) == y(i, j)) then
+                    loc_i = i
+                    loc_j = j
+                    passed = .false.
+                    exit
+                end if
+            end do
         end do
     end	if
  
@@ -248,19 +248,19 @@ contains
     integer				:: loc_i, loc_j, i, j
     
     passed = .true.
-	loc_i = lbound(x, 1)
-	loc_j = lbound(x, 2)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+    loc_i = lbound(x, 1)
+    loc_j = lbound(x, 2)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
         do i = lbound(x, 1), ubound(x, 1)
-			do j = lbound(x, 2), ubound(x, 2)
-				if (.not. x(i, j) == y(i, j)) then
-				    loc_i = i
-					loc_j = j
-					passed = .false.
-				    exit
-				end if
-			end do
+            do j = lbound(x, 2), ubound(x, 2)
+                if (.not. x(i, j) == y(i, j)) then
+                    loc_i = i
+                    loc_j = j
+                    passed = .false.
+                    exit
+                end if
+            end do
         end do
     end	if
  
@@ -297,13 +297,13 @@ contains
     logical				:: passed
     integer				:: loc, i
 
-	passed = .true.
-	loc = lbound(x, 1)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+    passed = .true.
+    loc = lbound(x, 1)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
         do i = lbound(x, 1), ubound(x, 1)
             if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
                 loc = i
-				passed = .false.
+                passed = .false.
                 exit
             end if
         end do
@@ -323,12 +323,12 @@ contains
     integer				:: loc, i
     
     passed = .true.
-	loc = lbound(x, 1)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+    loc = lbound(x, 1)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
         do i = lbound(x, 1), ubound(x, 1)
             if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
                 loc = i
-				passed = .false.
+                passed = .false.
                 exit
             end if
         end do
@@ -348,19 +348,19 @@ contains
     integer				:: loc_i, loc_j, i, j
     
     passed = .true.
-	loc_i = lbound(x, 1)
-	loc_j = lbound(x, 2)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+    loc_i = lbound(x, 1)
+    loc_j = lbound(x, 2)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
         do i = lbound(x, 1), ubound(x, 1)
-			do j = lbound(x, 2), ubound(x, 2)
-				if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
-				    loc_i = i
-					loc_j = j
-					passed = .false.
-				    exit
-				end if
-			end do
+            do j = lbound(x, 2), ubound(x, 2)
+                if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+                    loc_i = i
+                    loc_j = j
+                    passed = .false.
+                    exit
+                end if
+            end do
         end do
     end	if
  
@@ -378,19 +378,19 @@ contains
     integer				:: loc_i, loc_j, i, j
     
     passed = .true.
-	loc_i = lbound(x, 1)
-	loc_j = lbound(x, 2)
-	if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-		lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+    loc_i = lbound(x, 1)
+    loc_j = lbound(x, 2)
+    if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
+        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
         do i = lbound(x, 1), ubound(x, 1)
-			do j = lbound(x, 2), ubound(x, 2)
-				if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
-				    loc_i = i
-					loc_j = j
-					passed = .false.
-				    exit
-				end if
-			end do
+            do j = lbound(x, 2), ubound(x, 2)
+                if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+                    loc_i = i
+                    loc_j = j
+                    passed = .false.
+                    exit
+                end if
+            end do
         end do
     end	if
  
