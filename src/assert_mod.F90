@@ -20,8 +20,8 @@ module assert_mod
 
   interface assert_great_than
     module procedure assert_great_than_integer
-    module procedure assert_approximate_real4
-    module procedure assert_approximate_real8
+    module procedure assert_great_than_real4
+    module procedure assert_great_than_real8
   end interface assert_great_than
 
 contains
