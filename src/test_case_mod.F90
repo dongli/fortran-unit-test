@@ -12,11 +12,12 @@ module test_case_mod
   public test_case_append_assert
   public test_case_report
   public test_case_final
+  public test_suite_type
 
   type assert_result_type
     integer id
-    character(30) assert_operator
-    character(256) left_operand
+    character(30) :: assert_operator
+    character(256) :: left_operand
     character(256) :: right_operand = ''
     logical passed
     type(assert_result_type), pointer :: next => null()
@@ -56,7 +57,7 @@ contains
     type(assert_result_type), pointer :: assert_result1, assert_result2
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -86,7 +87,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -114,7 +115,7 @@ contains
     type(assert_result_type), pointer :: assert_result
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -155,7 +156,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -187,7 +188,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
