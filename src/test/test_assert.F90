@@ -5,7 +5,6 @@ program test_assert
   call test_case_init()
   call test_case_create('Test 1')
   
-  
   ! assert_approximate
   ! -> real4
   call assert_approximate(1.0, 2.0)
@@ -35,7 +34,6 @@ program test_assert
   call assert_approximate(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.1D0, 1.0D0, 1.0D0], [2, 2]), 0.1D0)
   call assert_approximate(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.01D0, 1.0D0, 1.0D0], [2, 2]), 0.1D0)
 
-  
   ! assert_false/_true
   call assert_false(.true.)
   call assert_false(.false.)
@@ -43,7 +41,6 @@ program test_assert
   call assert_true(.false.)
   call assert_true(.true.)
 
-  
   ! assert_equal
   ! -> string
   call assert_equal('abc', 'abcd')
@@ -75,7 +72,6 @@ program test_assert
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 2.0D0, 1.0D0, 1.0D0], [2, 2]))
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]))
 
-
   ! assert_great_than
   ! -> integer
   call assert_great_than(1, 1)
@@ -89,7 +85,6 @@ program test_assert
   call assert_great_than(1.0D0, 1.0D0)
   call assert_great_than(2.0D0, 1.0D0)
 
-  
   call test_case_report('Test 1')
   call test_case_final()
 
