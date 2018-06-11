@@ -78,8 +78,8 @@ contains
     integer, intent(in) :: x(:)
     integer, intent(in) :: y(:)
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
     
     if(all(x == y)) then 
         passed = .true.
@@ -94,7 +94,7 @@ contains
                 end if
             end do
         end if
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
  
@@ -105,8 +105,8 @@ contains
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
     
     if (all(x == y)) then 
         passed = .true.
@@ -121,7 +121,7 @@ contains
                 end if
             end do
         end if
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
  
@@ -132,8 +132,8 @@ contains
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
     
     if (all(x == y)) then 
         passed = .true.
@@ -148,7 +148,7 @@ contains
                 end if
             end do
         end if
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
  
@@ -159,8 +159,8 @@ contains
     character(*), intent(in) :: x(:)
     character(*), intent(in) :: y(:)
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
     
     if (all(x == y)) then 
         passed = .true.
@@ -175,7 +175,7 @@ contains
                 end if
             end do
         end if
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, x(loc), y(loc))
  
@@ -186,8 +186,8 @@ contains
     integer, intent(in) :: x(:, :)
     integer, intent(in) :: y(:, :)
     
-    logical				:: passed
-    integer				:: loc_i, loc_j, i, j
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -204,7 +204,7 @@ contains
                 end if
             end do
         end do
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
  
@@ -215,8 +215,8 @@ contains
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
     
-    logical				:: passed
-    integer				:: loc_i, loc_j, i, j
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -233,7 +233,7 @@ contains
                 end if
             end do
         end do
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
  
@@ -244,8 +244,8 @@ contains
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
     
-    logical				:: passed
-    integer				:: loc_i, loc_j, i, j
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -262,7 +262,7 @@ contains
                 end if
             end do
         end do
-    end	if
+    end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
  
@@ -294,8 +294,8 @@ contains
     real(4), intent(in) :: y(:)
     real(4), intent(in), optional :: eps
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
 
     passed = .true.
     loc = lbound(x, 1)
@@ -307,7 +307,7 @@ contains
                 exit
             end if
         end do
-    end	if
+    end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
  
@@ -319,8 +319,8 @@ contains
     real(8), intent(in) :: y(:)
     real(8), intent(in), optional :: eps
     
-    logical				:: passed
-    integer				:: loc, i
+    logical :: passed
+    integer :: loc, i
     
     passed = .true.
     loc = lbound(x, 1)
@@ -332,7 +332,7 @@ contains
                 exit
             end if
         end do
-    end	if
+    end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
  
@@ -344,8 +344,8 @@ contains
     real(4), intent(in) :: y(:, :)
     real(4), intent(in), optional :: eps
     
-    logical				:: passed
-    integer				:: loc_i, loc_j, i, j
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -362,7 +362,7 @@ contains
                 end if
             end do
         end do
-    end	if
+    end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
  
@@ -374,8 +374,8 @@ contains
     real(8), intent(in) :: y(:, :)
     real(8), intent(in), optional :: eps
     
-    logical				:: passed
-    integer				:: loc_i, loc_j, i, j
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -392,7 +392,7 @@ contains
                 end if
             end do
         end do
-    end	if
+    end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
  
