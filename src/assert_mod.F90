@@ -82,18 +82,18 @@ contains
     integer :: loc, i
     
     if(all(x == y)) then 
-        passed = .true.
-        loc = lbound(x, 1)
+      passed = .true.
+      loc = lbound(x, 1)
     else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(.not. x(i) == y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+      passed = .false.
+      if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+          if(.not. x(i) == y(i)) then
+            loc = i
+            exit
+          end if
+        end do
+      end if
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
@@ -109,18 +109,18 @@ contains
     integer :: loc, i
     
     if (all(x == y)) then 
-        passed = .true.
-        loc = lbound(x, 1)
+      passed = .true.
+      loc = lbound(x, 1)
     else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(.not. x(i) == y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+      passed = .false.
+      if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+          if(.not. x(i) == y(i)) then
+            loc = i
+            exit
+          end if
+        end do
+      end if
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
@@ -136,18 +136,18 @@ contains
     integer :: loc, i
     
     if (all(x == y)) then 
-        passed = .true.
-        loc = lbound(x, 1)
+      passed = .true.
+      loc = lbound(x, 1)
     else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(.not. x(i) == y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+      passed = .false.
+      if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+          if(.not. x(i) == y(i)) then
+            loc = i
+            exit
+          end if
+        end do
+      end if
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
@@ -163,18 +163,18 @@ contains
     integer :: loc, i
     
     if (all(x == y)) then 
-        passed = .true.
-        loc = lbound(x, 1)
+      passed = .true.
+      loc = lbound(x, 1)
     else
-        passed = .false.
-        if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-            do i = lbound(x, 1), ubound(x, 1)
-                if(.not. x(i) == y(i)) then
-                    loc = i
-                    exit
-                end if
-            end do
-        end if
+      passed = .false.
+      if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
+        do i = lbound(x, 1), ubound(x, 1)
+          if(.not. x(i) == y(i)) then
+            loc = i
+            exit
+          end if
+        end do
+      end if
     end if
  
     call test_case_append_assert('==', passed, x(loc), y(loc))
@@ -193,17 +193,17 @@ contains
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            do j = lbound(x, 2), ubound(x, 2)
-                if (.not. x(i, j) == y(i, j)) then
-                    loc_i = i
-                    loc_j = j
-                    passed = .false.
-                    exit
-                end if
-            end do
+      lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+      do i = lbound(x, 1), ubound(x, 1)
+        do j = lbound(x, 2), ubound(x, 2)
+          if (.not. x(i, j) == y(i, j)) then
+            loc_i = i
+            loc_j = j
+            passed = .false.
+            exit
+          end if
         end do
+      end do
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
@@ -222,17 +222,17 @@ contains
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            do j = lbound(x, 2), ubound(x, 2)
-                if (.not. x(i, j) == y(i, j)) then
-                    loc_i = i
-                    loc_j = j
-                    passed = .false.
-                    exit
-                end if
-            end do
+      lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+      do i = lbound(x, 1), ubound(x, 1)
+        do j = lbound(x, 2), ubound(x, 2)
+          if (.not. x(i, j) == y(i, j)) then
+            loc_i = i
+            loc_j = j
+            passed = .false.
+            exit
+          end if
         end do
+      end do
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
@@ -251,17 +251,17 @@ contains
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            do j = lbound(x, 2), ubound(x, 2)
-                if (.not. x(i, j) == y(i, j)) then
-                    loc_i = i
-                    loc_j = j
-                    passed = .false.
-                    exit
-                end if
-            end do
+      lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+      do i = lbound(x, 1), ubound(x, 1)
+        do j = lbound(x, 2), ubound(x, 2)
+          if (.not. x(i, j) == y(i, j)) then
+            loc_i = i
+            loc_j = j
+            passed = .false.
+            exit
+          end if
         end do
+      end do
     end if
  
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
@@ -300,13 +300,13 @@ contains
     passed = .true.
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
-                loc = i
-                passed = .false.
-                exit
-            end if
-        end do
+      do i = lbound(x, 1), ubound(x, 1)
+        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+          loc = i
+          passed = .false.
+          exit
+        end if
+      end do
     end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
@@ -325,13 +325,13 @@ contains
     passed = .true.
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
-                loc = i
-                passed = .false.
-                exit
-            end if
-        end do
+      do i = lbound(x, 1), ubound(x, 1)
+        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+          loc = i
+          passed = .false.
+          exit
+        end if
+      end do
     end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
@@ -351,17 +351,17 @@ contains
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            do j = lbound(x, 2), ubound(x, 2)
-                if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
-                    loc_i = i
-                    loc_j = j
-                    passed = .false.
-                    exit
-                end if
-            end do
+      lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+      do i = lbound(x, 1), ubound(x, 1)
+        do j = lbound(x, 2), ubound(x, 2)
+          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+            loc_i = i
+            loc_j = j
+            passed = .false.
+            exit
+          end if
         end do
+      end do
     end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
@@ -381,17 +381,17 @@ contains
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1) .and. &
-        lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
-        do i = lbound(x, 1), ubound(x, 1)
-            do j = lbound(x, 2), ubound(x, 2)
-                if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
-                    loc_i = i
-                    loc_j = j
-                    passed = .false.
-                    exit
-                end if
-            end do
+      lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
+      do i = lbound(x, 1), ubound(x, 1)
+        do j = lbound(x, 2), ubound(x, 2)
+          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+            loc_i = i
+            loc_j = j
+            passed = .false.
+            exit
+          end if
         end do
+      end do
     end if
  
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
