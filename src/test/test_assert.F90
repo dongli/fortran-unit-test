@@ -41,8 +41,7 @@ program test_assert
   call assert_approximate(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.01D0, 1.0D0, 1.0D0], [2, 2]), 0.1D0, suite = test_suite_approximate)
   
   ! -> report
-  call test_case_report('real4', test_suite_approximate)
-  call test_case_report('real8', test_suite_approximate)
+  call test_suite_report(test_suite_approximate)
   call test_case_final(test_suite_approximate)
   
   ! assert_false/_true
@@ -59,8 +58,7 @@ program test_assert
   call assert_true(.true., suite = test_suite_boolean)
   
   ! report
-  call test_case_report('false', test_suite_boolean)
-  call test_case_report('true', test_suite_boolean)
+  call test_suite_report(test_suite_boolean)
   call test_case_final(test_suite_boolean)
   
   ! assert_equal  
@@ -100,10 +98,7 @@ program test_assert
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 2.0D0, 1.0D0, 1.0D0], [2, 2]), suite = test_suite_equal)
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), suite = test_suite_equal)
   
-  call test_case_report('string', test_suite_equal)
-  call test_case_report('integer', test_suite_equal)
-  call test_case_report('real4', test_suite_equal)
-  call test_case_report('real8', test_suite_equal)
+  call test_suite_report(test_suite_equal)
   call test_case_final(test_suite_equal)
 
   ! assert_great_than
@@ -125,9 +120,7 @@ program test_assert
   call assert_great_than(2.0D0, 1.0D0, suite = test_suite_great_than)
   
   ! report
-  call test_case_report('integer', test_suite_great_than)
-  call test_case_report('real4', test_suite_great_than)
-  call test_case_report('real8', test_suite_great_than)
+  call test_suite_report(test_suite_great_than)
   call test_case_final(test_suite_great_than)
 
 end program test_assert
