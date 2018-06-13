@@ -9,6 +9,7 @@ module log_mod
   public log_error
   public log_table
   public log_header
+  public log_footer
   public log_err_unit
   public log_out_unit
 
@@ -96,5 +97,22 @@ contains
     write(log_unit, *)
 
   end subroutine log_header
+  
+  subroutine log_footer(log_unit)
+  
+    integer, intent(in) :: log_unit
+  
+    integer columns, i
+  
+    columns = 80 ! TODO: How to set this variable according to the actual terminal width?
+    write(log_unit, *)
+  
+    do i = 1, columns
+      write(log_unit, '(a)', advance='no') '/'
+    end do
+    write(log_unit, *)
+    write(log_unit, *)
+    
+  end subroutine log_footer
 
 end module log_mod
