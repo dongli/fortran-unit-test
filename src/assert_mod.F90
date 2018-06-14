@@ -37,46 +37,51 @@ module assert_mod
 
 contains
 
-  subroutine assert_equal_integer(x, y)
+  subroutine assert_equal_integer(x, y, suite)
 
     integer, intent(in) :: x
     integer, intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y), suite)
 
   end subroutine assert_equal_integer
 
-  subroutine assert_equal_real4(x, y)
+  subroutine assert_equal_real4(x, y, suite)
 
     real(4), intent(in) :: x
     real(4), intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y), suite)
 
   end subroutine assert_equal_real4
 
-  subroutine assert_equal_real8(x, y)
+  subroutine assert_equal_real8(x, y, suite)
 
     real(8), intent(in) :: x
     real(8), intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('==', x == y, to_string(x), to_string(y))
+    call test_case_append_assert('==', x == y, to_string(x), to_string(y), suite)
 
   end subroutine assert_equal_real8
 
-  subroutine assert_equal_string(x, y)
+  subroutine assert_equal_string(x, y, suite)
 
     character(*), intent(in) :: x
     character(*), intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('==', trim(x) == trim(y), x, y)
+    call test_case_append_assert('==', trim(x) == trim(y), x, y, suite)
 
   end subroutine assert_equal_string
   
-  subroutine assert_equal_integer_vec(x, y)
+  subroutine assert_equal_integer_vec(x, y, suite)
  
     integer, intent(in) :: x(:)
     integer, intent(in) :: y(:)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -96,14 +101,15 @@ contains
       end if
     end if
  
-    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
+    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)), suite)
  
   end subroutine assert_equal_integer_vec
   
-  subroutine assert_equal_real4_vec(x, y)
+  subroutine assert_equal_real4_vec(x, y, suite)
  
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -123,14 +129,15 @@ contains
       end if
     end if
  
-    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
+    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)), suite)
  
   end subroutine assert_equal_real4_vec
   
-  subroutine assert_equal_real8_vec(x, y)
+  subroutine assert_equal_real8_vec(x, y, suite)
  
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -150,14 +157,15 @@ contains
       end if
     end if
  
-    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)))
+    call test_case_append_assert('==', passed, to_string(x(loc)), to_string(y(loc)), suite)
  
   end subroutine assert_equal_real8_vec
   
-  subroutine assert_equal_string_vec(x, y)
+  subroutine assert_equal_string_vec(x, y, suite)
  
     character(*), intent(in) :: x(:)
     character(*), intent(in) :: y(:)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -177,14 +185,15 @@ contains
       end if
     end if
  
-    call test_case_append_assert('==', passed, x(loc), y(loc))
+    call test_case_append_assert('==', passed, x(loc), y(loc), suite)
  
   end subroutine assert_equal_string_vec
   
-  subroutine assert_equal_integer_array(x, y)
+  subroutine assert_equal_integer_array(x, y, suite)
  
     integer, intent(in) :: x(:, :)
     integer, intent(in) :: y(:, :)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -206,14 +215,15 @@ contains
       end do
     end if
  
-    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), suite)
  
   end subroutine assert_equal_integer_array
   
-  subroutine assert_equal_real4_array(x, y)
+  subroutine assert_equal_real4_array(x, y, suite)
  
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -235,14 +245,15 @@ contains
       end do
     end if
  
-    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), suite)
  
   end subroutine assert_equal_real4_array
   
-  subroutine assert_equal_real8_array(x, y)
+  subroutine assert_equal_real8_array(x, y, suite)
  
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -263,36 +274,39 @@ contains
         end do
       end do
     end if
- 
-    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+
+    call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), suite)
  
   end subroutine assert_equal_real8_array
 
-  subroutine assert_approximate_real4(x, y, eps)
+  subroutine assert_approximate_real4(x, y, eps, suite)
 
     real(4), intent(in) :: x
     real(4), intent(in) :: y
     real(4), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0e-10, present(eps)), to_string(x), to_string(y))
+    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0e-10, present(eps)), to_string(x), to_string(y), suite)
 
   end subroutine assert_approximate_real4
 
-  subroutine assert_approximate_real8(x, y, eps)
+  subroutine assert_approximate_real8(x, y, eps, suite)
 
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     real(8), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0d-10, present(eps)), to_string(x), to_string(y))
+    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0d-10, present(eps)), to_string(x), to_string(y), suite)
 
   end subroutine assert_approximate_real8
   
-  subroutine assert_approximate_real4_vec(x, y, eps)
+  subroutine assert_approximate_real4_vec(x, y, eps, suite)
  
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
     real(4), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -309,15 +323,16 @@ contains
       end do
     end if
  
-    call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
+    call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)), suite)
  
   end subroutine assert_approximate_real4_vec
   
-  subroutine assert_approximate_real8_vec(x, y, eps)
+  subroutine assert_approximate_real8_vec(x, y, eps, suite)
  
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
     real(8), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
@@ -334,15 +349,16 @@ contains
       end do
     end if
  
-    call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)))
+    call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)), suite)
  
   end subroutine assert_approximate_real8_vec
   
-  subroutine assert_approximate_real4_array(x, y, eps)
+  subroutine assert_approximate_real4_array(x, y, eps, suite)
  
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
     real(4), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -364,15 +380,16 @@ contains
       end do
     end if
  
-    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), suite)
  
   end subroutine assert_approximate_real4_array
   
-  subroutine assert_approximate_real8_array(x, y, eps)
+  subroutine assert_approximate_real8_array(x, y, eps, suite)
  
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
     real(8), intent(in), optional :: eps
+    type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -394,50 +411,55 @@ contains
       end do
     end if
  
-    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)))
+    call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), suite)
  
   end subroutine assert_approximate_real8_array
 
-  subroutine assert_great_than_integer(x, y)
+  subroutine assert_great_than_integer(x, y, suite)
 
     integer, intent(in) :: x
     integer, intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y), suite)
 
   end subroutine assert_great_than_integer
 
-  subroutine assert_great_than_real4(x, y)
+  subroutine assert_great_than_real4(x, y, suite)
 
     real(4), intent(in) :: x
     real(4), intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y), suite)
 
   end subroutine assert_great_than_real4
 
-  subroutine assert_great_than_real8(x, y)
+  subroutine assert_great_than_real8(x, y, suite)
 
     real(8), intent(in) :: x
     real(8), intent(in) :: y
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('>', x > y, to_string(x), to_string(y))
+    call test_case_append_assert('>', x > y, to_string(x), to_string(y), suite)
 
   end subroutine assert_great_than_real8
 
-  subroutine assert_true(x)
+  subroutine assert_true(x, suite)
 
     logical, intent(in) :: x
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('true', x, to_string(x))
+    call test_case_append_assert('true', x, to_string(x), suite = suite)
 
   end subroutine assert_true
 
-  subroutine assert_false(x)
+  subroutine assert_false(x, suite)
 
     logical, intent(in) :: x
+    type(test_suite_type), intent(in), optional :: suite
 
-    call test_case_append_assert('false', .not. x, to_string(x))
+    call test_case_append_assert('false', .not. x, to_string(x), suite = suite)
 
   end subroutine assert_false
 

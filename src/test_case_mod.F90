@@ -11,12 +11,14 @@ module test_case_mod
   public test_case_create
   public test_case_append_assert
   public test_case_report
+  public test_suite_report
   public test_case_final
+  public test_suite_type
 
   type assert_result_type
     integer id
-    character(30) assert_operator
-    character(256) left_operand
+    character(30) :: assert_operator
+    character(256) :: left_operand
     character(256) :: right_operand = ''
     logical passed
     type(assert_result_type), pointer :: next => null()
@@ -56,7 +58,7 @@ contains
     type(assert_result_type), pointer :: assert_result1, assert_result2
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -86,7 +88,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -114,15 +116,15 @@ contains
     type(assert_result_type), pointer :: assert_result
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
     end if
 
-    test_case => get_test_case(name, suite)
+    test_case => get_test_case(name, dummy_suite)
 
-    call log_header(log_out_unit, 'Test case report')
+    call log_header(log_out_unit, 'Report of Suite: '//trim(dummy_suite%name)//', Case: '//trim(test_case%name))
     write(log_out_unit, *) trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
       trim(to_string(test_case%num_assert)) // ' assertions succeed.'
     write(log_out_unit, *)
@@ -144,6 +146,56 @@ contains
     end do
 
   end subroutine test_case_report
+  
+  subroutine test_suite_report(suite)
+  
+    type(test_suite_type), intent(in), optional, target :: suite
+    type(test_suite_type), pointer :: dummy_suite
+    type(test_case_type), pointer :: test_case
+    type(assert_result_type), pointer :: assert_result
+    integer :: num_test_case
+    integer :: num_all_succeed_assert
+    integer :: num_all_assert
+
+    ! if no suite parameter was passed, use default test suite
+    if (present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+    
+    call log_header(log_out_unit, 'Report of Suite: '//trim(dummy_suite%name))
+  
+    num_test_case = 0
+    num_all_succeed_assert = 0
+    num_all_assert = 0
+  
+    ! prints all test cases
+    if (associated(dummy_suite%test_case_head)) then
+      write(log_out_unit, *) '-> Details:'
+    
+      test_case => dummy_suite%test_case_head
+      do while (associated(test_case))
+        num_test_case = num_test_case + 1
+      
+        write(log_out_unit, *) trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
+          trim(to_string(test_case%num_assert)) // ' assertions succeed.'
+      
+        num_all_succeed_assert = num_all_succeed_assert + test_case%num_succeed_assert
+        num_all_assert = num_all_assert + test_case%num_assert
+            
+        test_case => test_case%next
+      end do
+    end if
+  
+    write(log_out_unit, *)
+    write(log_out_unit, *) '-> Summary:'  
+    write(log_out_unit, *) trim(dummy_suite%name) // ': ', trim(to_string(num_all_succeed_assert)), ' of ' // &
+      trim(to_string(num_all_assert)) // ' assertions succeed.'
+  
+    call log_footer(log_out_unit)
+    
+  end subroutine test_suite_report
 
   subroutine test_case_append_assert(assert_operator, passed, left_operand, right_operand, suite)
 
@@ -155,7 +207,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
@@ -187,7 +239,7 @@ contains
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
-    if( present(suite) ) then
+    if (present(suite) ) then
       dummy_suite => suite
     else
       dummy_suite => default_test_suite
