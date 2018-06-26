@@ -37,7 +37,11 @@ contains
     character(10) fmt
     character(range(x)+2) tmp
 
-    w = merge(decimal_width, 4, present(decimal_width))
+    if (present(decimal_width)) then
+      w = decimal_width
+    else
+      w = 4
+    end if
     write(fmt, "('(f', i0, '.', i0, ')')") w+1, w
     y = int(x)
     write(tmp, fmt) abs(x-y)
@@ -59,7 +63,11 @@ contains
     character(10) fmt
     character(range(x)+2) tmp
 
-    w = merge(decimal_width, 4, present(decimal_width))
+    if (present(decimal_width)) then
+      w = decimal_width
+    else
+      w = 4
+    end if
     write(fmt, "('(f', i0, '.', i0, ')')") w+1, w
     y = int(x)
     write(tmp, fmt) abs(x-y)

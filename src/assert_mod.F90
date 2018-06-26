@@ -315,7 +315,7 @@ contains
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
-        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0e-10, present(eps))) then
           loc = i
           passed = .false.
           exit
@@ -370,7 +370,7 @@ contains
       lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
-          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0e-10, present(eps))) then
             loc_i = i
             loc_j = j
             passed = .false.

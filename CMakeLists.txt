@@ -6,7 +6,10 @@ project (FortranUnitTest Fortran)
 
 set (version 0.0.1)
  
-set (CMAKE_Fortran_FLAGS "-ffree-line-length-none")
+if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
+  set (CMAKE_Fortran_FLAGS "-ffree-line-length-none")
+elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "PGI")
+endif ()
 set (CMAKE_Fortran_MODULE_DIRECTORY "${CMAKE_BINARY_DIR}/fortran_unit_test")
 
 set (sources
