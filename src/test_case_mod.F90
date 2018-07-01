@@ -20,6 +20,8 @@ module test_case_mod
     character(30) :: assert_operator
     character(256) :: left_operand
     character(256) :: right_operand = ''
+    character(256) :: file_name
+    integer line_number
     logical passed
     type(assert_result_type), pointer :: next => null()
   end type assert_result_type
@@ -136,6 +138,8 @@ contains
           write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x (' // trim(assert_result%left_operand) // ') ' // trim(assert_result%assert_operator) // &
             ' y (' // trim(assert_result%right_operand) // ')'
+          write(log_err_unit, *)
+          write(log_err_unit, *) 'Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
         else
           write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x is not ' // trim(assert_result%assert_operator) // '!'
@@ -197,13 +201,16 @@ contains
     
   end subroutine test_suite_report
 
-  subroutine test_case_append_assert(assert_operator, passed, left_operand, right_operand, suite)
+  subroutine test_case_append_assert(assert_operator, passed, left_operand, right_operand, file_name, line_number, suite)
 
     character(*), intent(in) :: assert_operator
     logical, intent(in) :: passed
     character(*), intent(in) :: left_operand
     character(*), intent(in), optional :: right_operand
+    character(*), intent(in) :: file_name
+    integer, intent(in) :: line_number
     type(test_suite_type), target, optional :: suite
+
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
@@ -223,6 +230,8 @@ contains
     dummy_suite%test_case_tail%assert_result_tail%assert_operator = assert_operator
     dummy_suite%test_case_tail%assert_result_tail%passed = passed
     dummy_suite%test_case_tail%assert_result_tail%left_operand = left_operand
+    dummy_suite%test_case_tail%assert_result_tail%file_name = file_name
+    dummy_suite%test_case_tail%assert_result_tail%line_number = line_number
     if (present(right_operand)) dummy_suite%test_case_tail%assert_result_tail%right_operand = right_operand
     dummy_suite%test_case_tail%num_assert = dummy_suite%test_case_tail%num_assert + 1
     if (passed) dummy_suite%test_case_tail%num_succeed_assert = dummy_suite%test_case_tail%num_succeed_assert + 1

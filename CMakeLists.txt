@@ -13,21 +13,23 @@ endif ()
 set (CMAKE_Fortran_MODULE_DIRECTORY "${CMAKE_BINARY_DIR}/fortran_unit_test")
 
 set (sources
-  "${PROJECT_SOURCE_DIR}/src/string_mod.F90"
-  "${PROJECT_SOURCE_DIR}/src/log_mod.F90"
-  "${PROJECT_SOURCE_DIR}/src/assert_mod.F90"
-  "${PROJECT_SOURCE_DIR}/src/test_case_mod.F90"
-  "${PROJECT_SOURCE_DIR}/src/unit_test.F90"
+  src/string_mod.F90
+  src/log_mod.F90
+  src/assert_mod.F90
+  src/test_case_mod.F90
+  src/unit_test.F90
 )
+
+set (UNIT_TEST_INCLUDE_DIR "${CMAKE_BINARY_DIR}/fortran_unit_test" PARENT_SCOPE)
 
 add_library (fortran_unit_test SHARED ${sources})
 set_property (TARGET fortran_unit_test PROPERTY VERSION ${version})
 set_property (TARGET fortran_unit_test PROPERTY SOVERSION 1)
 
-add_executable (test_log "${PROJECT_SOURCE_DIR}/src/test/test_log.F90")
+add_executable (test_log src/test/test_log.F90)
 target_link_libraries (test_log fortran_unit_test)
 
-add_executable (test_assert "${PROJECT_SOURCE_DIR}/src/test/test_assert.F90")
+add_executable (test_assert src/test/test_assert.F90)
 target_link_libraries (test_assert fortran_unit_test)
 
 install (TARGETS fortran_unit_test EXPORT FortranUnitTestTargets

@@ -6,6 +6,7 @@ This is a Fortran Unit Test library to encourage scientific programmer to write 
 Current example:
 
 ```
+! demo.F90
 program good_test
 
   use unit_test
@@ -16,9 +17,10 @@ program good_test
 
   call test_case_create('Test 1')
 
-  call assert_approximate(1.0, 2.0)
+  ! By sending macros __FILE__ and __LINE__, report will print the file and line number where assertion fails.
+  call assert_approximate(1.0, 2.0, __FILE__, __LINE__) ! line 14
 
-  call test_cast_final()
+  call test_case_final()
 
 end program good_test
 ```
@@ -26,12 +28,21 @@ end program good_test
 Output:
 
 ```
+////////////// Report of Suite: Default test suite, Case: Test 1 ////////////////
 
- //////////////////////////////////// ERROR ////////////////////////////////////
+ Test 1: 0 of 1 assertions succeed.
 
- Test case: Test 1:
+ Assertion #1 failed with reason: x (1.0000) =~ y (2.0000)
 
- Reason: x (1.0000) =~ y (2.0000) failed!
+ Check line: /.../demo.F90:14
+```
 
-STOP 1
+You can integrate this library into your CMake based project as:
+
+```
+...
+add_subdirectory (<fortran-unit-test root>)
+include_directories (${UNIT_TEST_INCLUDE_DIR})
+...
+target_link_libraries (<user target> fortran_unit_test ...)
 ```
