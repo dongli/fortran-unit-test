@@ -207,8 +207,8 @@ contains
     logical, intent(in) :: passed
     character(*), intent(in) :: left_operand
     character(*), intent(in), optional :: right_operand
-    character(*), intent(in) :: file_name
-    integer, intent(in) :: line_number
+    character(*), intent(in), optional :: file_name
+    integer, intent(in), optional :: line_number
     type(test_suite_type), target, optional :: suite
 
     type(test_suite_type), pointer :: dummy_suite
@@ -230,8 +230,8 @@ contains
     dummy_suite%test_case_tail%assert_result_tail%assert_operator = assert_operator
     dummy_suite%test_case_tail%assert_result_tail%passed = passed
     dummy_suite%test_case_tail%assert_result_tail%left_operand = left_operand
-    dummy_suite%test_case_tail%assert_result_tail%file_name = file_name
-    dummy_suite%test_case_tail%assert_result_tail%line_number = line_number
+    if (present(file_name)) dummy_suite%test_case_tail%assert_result_tail%file_name = file_name
+    if (present(line_number)) dummy_suite%test_case_tail%assert_result_tail%line_number = line_number
     if (present(right_operand)) dummy_suite%test_case_tail%assert_result_tail%right_operand = right_operand
     dummy_suite%test_case_tail%num_assert = dummy_suite%test_case_tail%num_assert + 1
     if (passed) dummy_suite%test_case_tail%num_succeed_assert = dummy_suite%test_case_tail%num_succeed_assert + 1
