@@ -21,7 +21,7 @@ module test_case_mod
     character(256) :: left_operand
     character(256) :: right_operand = ''
     character(256) :: file_name = 'Unknown file'
-    integer :: line_number	= -1
+    integer :: line_number = -1
     logical :: passed = .false.
     type(assert_result_type), pointer :: next => null()
   end type assert_result_type
