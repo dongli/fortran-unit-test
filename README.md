@@ -1,12 +1,15 @@
-Introduction
-============
+# Fortran Unit Test Library FUT
 
-This is a Fortran Unit Test library to encourage scientific programmer to write tests!
+### Overview
+This is a Fortran Unit Test library purely written in Fortran to encourage scientific programmer to write tests.
 
-Current example:
+### Installation
+A CMake-Setup is provided.
 
+### Example
+
+demo.F90:
 ```
-! demo.F90
 program good_test
 
   use unit_test
@@ -26,7 +29,6 @@ end program good_test
 ```
 
 Output:
-
 ```
 ////////////// Report of Suite: Default test suite, Case: Test 1 ////////////////
 
@@ -46,3 +48,14 @@ include_directories (${UNIT_TEST_INCLUDE_DIR})
 ...
 target_link_libraries (<user target> fortran_unit_test ...)
 ```
+
+### Compiler Support
+
+[![Compiler](https://img.shields.io/badge/GNU-not%20tested+-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/Intel-v18.0.3.210+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
+
+
