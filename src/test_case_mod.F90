@@ -20,9 +20,9 @@ module test_case_mod
     character(30) :: assert_operator
     character(256) :: left_operand
     character(256) :: right_operand = ''
-    character(256) :: file_name
-    integer line_number
-    logical passed
+    character(256) :: file_name = 'Unknown file'
+    integer :: line_number = -1
+    logical :: passed = .false.
     type(assert_result_type), pointer :: next => null()
   end type assert_result_type
 
@@ -138,13 +138,12 @@ contains
           write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x (' // trim(assert_result%left_operand) // ') ' // trim(assert_result%assert_operator) // &
             ' y (' // trim(assert_result%right_operand) // ')'
-          write(log_err_unit, *)
           write(log_err_unit, *) 'Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
         else
           write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x is not ' // trim(assert_result%assert_operator) // '!'
         end if
-        write(6, *)
+        write(log_err_unit, *)
       end if
       assert_result => assert_result%next
     end do
@@ -187,6 +186,23 @@ contains
       
         num_all_succeed_assert = num_all_succeed_assert + test_case%num_succeed_assert
         num_all_assert = num_all_assert + test_case%num_assert
+        
+        assert_result => test_case%assert_result_head
+        do while (associated(assert_result))
+          if (.not. assert_result%passed) then
+            if (assert_result%right_operand /= '') then
+              write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+                'x (' // trim(assert_result%left_operand) // ') ' // trim(assert_result%assert_operator) // &
+                ' y (' // trim(assert_result%right_operand) // ')'
+              write(log_err_unit, *) 'Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
+            else
+              write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+                'x is not ' // trim(assert_result%assert_operator) // '!'
+            end if
+            write(log_err_unit, *)
+          end if
+          assert_result => assert_result%next
+        end do
             
         test_case => test_case%next
       end do

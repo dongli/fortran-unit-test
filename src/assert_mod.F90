@@ -6,9 +6,6 @@ module assert_mod
 
   implicit none
 
-  character(12), parameter :: unknown_file = 'Unknown file'
-  integer, parameter :: unknown_line = 0
-
   interface assert_equal
     module procedure assert_equal_integer
     module procedure assert_equal_real4

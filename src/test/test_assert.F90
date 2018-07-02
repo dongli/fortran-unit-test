@@ -116,8 +116,8 @@ program test_assert
   
   ! -> real8
   call test_case_create('real8', test_suite_great_than)
-  call assert_great_than(1.0D0, 1.0D0, suite=test_suite_great_than)
-  call assert_great_than(2.0D0, 1.0D0, suite=test_suite_great_than)
+  call assert_great_than(1.0D0, 1.0D0, __FILE__, __LINE__, test_suite_great_than)
+  call assert_great_than(2.0D0, 1.0D0, __FILE__, __LINE__, test_suite_great_than)
   
   ! report
   call test_suite_report(test_suite_great_than)
