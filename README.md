@@ -51,8 +51,8 @@ target_link_libraries (<user target> fortran_unit_test ...)
 
 ### Compiler Support
 
-[![Compiler](https://img.shields.io/badge/GNU-not%20tested+-yellow.svg)]()
-[![Compiler](https://img.shields.io/badge/PGI-not%20tested-yellow.svg)]()
+[![Compiler](https://img.shields.io/badge/GNU-v4.8.5+-brightgreen.svg)]()
+[![Compiler](https://img.shields.io/badge/PGI-v18.4-brightgreen.svg)]()
 [![Compiler](https://img.shields.io/badge/Intel-v17.0.2.187+-brightgreen.svg)]()
 [![Compiler](https://img.shields.io/badge/IBM%20XL-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
