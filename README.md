@@ -32,11 +32,12 @@ program good_test
   ! example with specific suite
   specific_suite%name = 'my specific test suite'
   call test_case_create('Specific Test 1', specific_suite)
-  call assert_approximate(1.0, 2.0, suite = specific_suite)
+  ! suite = SUITE need in this case (cause optional argument eps, file_name, line_number is missing)
+  call assert_approximate(1.0, 2.0, suite=specific_suite)
   
   call test_case_create('Specific Test 2', specific_suite)
   ! suite = SUITE need in this case (cause optional argument eps is missing)
-  call assert_equal(1.0, 2.0, __FILE__, __LINE__,  suite = specific_suite)
+  call assert_equal(1.0, 2.0, __FILE__, __LINE__,  suite=specific_suite)
   
   call test_case_create('Specific Test 3', specific_suite)
   call assert_approximate(1.0, 2.0, __FILE__, __LINE__, 1E-0, specific_suite)
