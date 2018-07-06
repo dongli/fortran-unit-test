@@ -108,6 +108,59 @@ include_directories (${UNIT_TEST_INCLUDE_DIR})
 target_link_libraries (<user target> fortran_unit_test ...)
 ```
 
+### Supported Data Types
++ assert_equal()
+  + single data type
+    * [ ] `integer(1)`;
+    * [x] `integer(4)`;
+    * [ ] `integer(8)`;
+    * [x] `real(4)`;
+    * [x] `real(8)`;
+    * [x] `character(*)`;
+  + vector data type
+    * [ ] `integer(1), dimension(:)`;
+    * [x] `integer(4), dimension(:)`;
+    * [ ] `integer(8), dimension(:)`;
+    * [x] `real(4), dimension(:)`;
+    * [x] `real(8), dimension(:)`;
+    * [x] `character(*), dimension(:)`;
+  + array data type
+    * [ ] `integer(1), dimension(:, :)`;
+    * [x] `integer(4), dimension(:, :)`;
+    * [ ] `integer(8), dimension(:, :)`;
+    * [x] `real(4), dimension(:, :)`;
+    * [x] `real(8), dimension(:, :)`;
+    * [ ] `character(*), dimension(:, :)`;
++ assert_approximate()
+  + single data type
+    * [x] `real(4)`;
+    * [x] `real(8)`;
+  + vector data type
+    * [x] `real(4), dimension(:)`;
+    * [x] `real(8), dimension(:)`;
+  + array data type
+    * [x] `real(4), dimension(:, :)`;
+    * [x] `real(8), dimension(:, :)`;
++ assert_great_then()
+  + single data type
+    * [ ] `integer(1)`;
+    * [x] `integer(4)`;
+    * [ ] `integer(8)`;
+    * [x] `real(4)`;
+    * [x] `real(8)`;
+  + vector data type
+    * [ ] `integer(1), dimension(:)`;
+    * [ ] `integer(4), dimension(:)`;
+    * [ ] `integer(8), dimension(:)`;
+    * [ ] `real(4), dimension(:)`;
+    * [ ] `real(8), dimension(:)`;
+  + array data type
+    * [ ] `integer(1), dimension(:, :)`;
+    * [ ] `integer(4), dimension(:, :)`;
+    * [ ] `integer(8), dimension(:, :)`;
+    * [ ] `real(4), dimension(:, :)`;
+    * [ ] `real(8), dimension(:, :)`;
+
 ### Compiler Support
 
 [![Compiler](https://img.shields.io/badge/GNU-v4.8.5+-brightgreen.svg)]()
