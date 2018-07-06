@@ -132,26 +132,26 @@ target_link_libraries (<user target> fortran_unit_test ...)
 ### Supported Data Types
 + assert_equal()
   + single data type
-    * [ ] `integer(1)`;
+    * [x] `integer(1)`;
     * [x] `integer(4)`;
-    * [ ] `integer(8)`;
+    * [x] `integer(8)`;
     * [x] `real(4)`;
     * [x] `real(8)`;
     * [x] `character(*)`;
   + vector data type
-    * [ ] `integer(1), dimension(:)`;
+    * [x] `integer(1), dimension(:)`;
     * [x] `integer(4), dimension(:)`;
-    * [ ] `integer(8), dimension(:)`;
+    * [x] `integer(8), dimension(:)`;
     * [x] `real(4), dimension(:)`;
     * [x] `real(8), dimension(:)`;
     * [x] `character(*), dimension(:)`;
   + array data type
-    * [ ] `integer(1), dimension(:, :)`;
+    * [x] `integer(1), dimension(:, :)`;
     * [x] `integer(4), dimension(:, :)`;
-    * [ ] `integer(8), dimension(:, :)`;
+    * [x] `integer(8), dimension(:, :)`;
     * [x] `real(4), dimension(:, :)`;
     * [x] `real(8), dimension(:, :)`;
-    * [ ] `character(*), dimension(:, :)`;
+    * [x] `character(*), dimension(:, :)`;
 + assert_approximate()
   + single data type
     * [x] `real(4)`;
@@ -164,9 +164,9 @@ target_link_libraries (<user target> fortran_unit_test ...)
     * [x] `real(8), dimension(:, :)`;
 + assert_great_then()
   + single data type
-    * [ ] `integer(1)`;
+    * [x] `integer(1)`;
     * [x] `integer(4)`;
-    * [ ] `integer(8)`;
+    * [x] `integer(8)`;
     * [x] `real(4)`;
     * [x] `real(8)`;
   + vector data type
