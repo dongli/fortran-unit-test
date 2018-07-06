@@ -18,12 +18,12 @@
 ### Overview
 This is a Fortran Unit Test library purely written in Fortran to encourage scientific programmer to write tests.
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
 
 ### Installation
 A CMake-Setup is provided.
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
 
 ### Example
 
@@ -127,7 +127,7 @@ include_directories (${UNIT_TEST_INCLUDE_DIR})
 target_link_libraries (<user target> fortran_unit_test ...)
 ```
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
 
 ### Supported Data Types
 + assert_equal()
@@ -182,7 +182,7 @@ Go to [Top](#top)
     * [ ] `real(4), dimension(:, :)`;
     * [ ] `real(8), dimension(:, :)`;
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
 
 ### Compiler Support
 
@@ -193,9 +193,9 @@ Go to [Top](#top)
 [![Compiler](https://img.shields.io/badge/g95-not%20tested-yellow.svg)]()
 [![Compiler](https://img.shields.io/badge/NAG-not%20tested-yellow.svg)]()
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
 
 ### License
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)]()
 
-Go to [Top](#top)
+<sub>Go to [Top](#top)</sub>
