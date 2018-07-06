@@ -7,7 +7,10 @@ module string_mod
   public to_string
 
   interface to_string
-    module procedure integer_to_string
+    module procedure integer1_to_string
+    module procedure integer2_to_string
+    module procedure integer4_to_string
+    module procedure integer8_to_string
     module procedure real4_to_string
     module procedure real8_to_string
     module procedure logical_to_string
@@ -15,9 +18,9 @@ module string_mod
 
 contains
 
-  function integer_to_string(x) result(res)
+  function integer1_to_string(x) result(res)
 
-    integer, intent(in) :: x
+    integer(1), intent(in) :: x
     character(:), allocatable :: res
 
     character(range(x)+2) tmp
@@ -25,7 +28,43 @@ contains
     write(tmp, '(i0)') x
     res = tmp
 
-  end function integer_to_string
+  end function integer1_to_string
+  
+  function integer2_to_string(x) result(res)
+
+    integer(2), intent(in) :: x
+    character(:), allocatable :: res
+
+    character(range(x)+2) tmp
+
+    write(tmp, '(i0)') x
+    res = tmp
+
+  end function integer2_to_string
+  
+  function integer4_to_string(x) result(res)
+
+    integer(4), intent(in) :: x
+    character(:), allocatable :: res
+
+    character(range(x)+2) tmp
+
+    write(tmp, '(i0)') x
+    res = tmp
+
+  end function integer4_to_string
+  
+  function integer8_to_string(x) result(res)
+
+    integer(8), intent(in) :: x
+    character(:), allocatable :: res
+
+    character(range(x)+2) tmp
+
+    write(tmp, '(i0)') x
+    res = tmp
+
+  end function integer8_to_string
 
   function real4_to_string(x, decimal_width) result(res)
 
@@ -46,9 +85,9 @@ contains
     y = int(x)
     write(tmp, fmt) abs(x-y)
     if (x < y) then
-      res = '-' // trim(integer_to_string(y)) // trim(tmp)
+      res = '-' // trim(to_string(y)) // trim(tmp)
     else
-      res = trim(integer_to_string(y)) // trim(tmp)
+      res = trim(to_string(y)) // trim(tmp)
     end if
 
   end function real4_to_string
@@ -72,9 +111,9 @@ contains
     y = int(x)
     write(tmp, fmt) abs(x-y)
     if (x < y) then
-      res = '-' // trim(integer_to_string(y)) // trim(tmp)
+      res = '-' // trim(to_string(y)) // trim(tmp)
     else
-      res = trim(integer_to_string(y)) // trim(tmp)
+      res = trim(to_string(y)) // trim(tmp)
     end if
 
   end function real8_to_string
