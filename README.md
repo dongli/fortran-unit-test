@@ -133,6 +133,7 @@ target_link_libraries (<user target> fortran_unit_test ...)
 + assert_equal()
   + single data type
     * [x] `integer(1)`;
+    * [x] `integer(2)`;
     * [x] `integer(4)`;
     * [x] `integer(8)`;
     * [x] `real(4)`;
@@ -140,6 +141,7 @@ target_link_libraries (<user target> fortran_unit_test ...)
     * [x] `character(*)`;
   + vector data type
     * [x] `integer(1), dimension(:)`;
+    * [x] `integer(2), dimension(:)`;
     * [x] `integer(4), dimension(:)`;
     * [x] `integer(8), dimension(:)`;
     * [x] `real(4), dimension(:)`;
@@ -147,6 +149,7 @@ target_link_libraries (<user target> fortran_unit_test ...)
     * [x] `character(*), dimension(:)`;
   + array data type
     * [x] `integer(1), dimension(:, :)`;
+    * [x] `integer(2), dimension(:, :)`;
     * [x] `integer(4), dimension(:, :)`;
     * [x] `integer(8), dimension(:, :)`;
     * [x] `real(4), dimension(:, :)`;
@@ -165,18 +168,21 @@ target_link_libraries (<user target> fortran_unit_test ...)
 + assert_great_then()
   + single data type
     * [x] `integer(1)`;
+    * [x] `integer(2)`;
     * [x] `integer(4)`;
     * [x] `integer(8)`;
     * [x] `real(4)`;
     * [x] `real(8)`;
   + vector data type
     * [x] `integer(1), dimension(:)`;
+    * [x] `integer(2), dimension(:)`;
     * [x] `integer(4), dimension(:)`;
     * [x] `integer(8), dimension(:)`;
     * [x] `real(4), dimension(:)`;
     * [x] `real(8), dimension(:)`;
   + array data type
     * [x] `integer(1), dimension(:, :)`;
+    * [x] `integer(2), dimension(:, :)`;
     * [x] `integer(4), dimension(:, :)`;
     * [x] `integer(8), dimension(:, :)`;
     * [x] `real(4), dimension(:, :)`;
