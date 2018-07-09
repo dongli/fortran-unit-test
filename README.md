@@ -170,17 +170,17 @@ target_link_libraries (<user target> fortran_unit_test ...)
     * [x] `real(4)`;
     * [x] `real(8)`;
   + vector data type
-    * [ ] `integer(1), dimension(:)`;
-    * [ ] `integer(4), dimension(:)`;
-    * [ ] `integer(8), dimension(:)`;
-    * [ ] `real(4), dimension(:)`;
-    * [ ] `real(8), dimension(:)`;
+    * [x] `integer(1), dimension(:)`;
+    * [x] `integer(4), dimension(:)`;
+    * [x] `integer(8), dimension(:)`;
+    * [x] `real(4), dimension(:)`;
+    * [x] `real(8), dimension(:)`;
   + array data type
-    * [ ] `integer(1), dimension(:, :)`;
-    * [ ] `integer(4), dimension(:, :)`;
-    * [ ] `integer(8), dimension(:, :)`;
-    * [ ] `real(4), dimension(:, :)`;
-    * [ ] `real(8), dimension(:, :)`;
+    * [x] `integer(1), dimension(:, :)`;
+    * [x] `integer(4), dimension(:, :)`;
+    * [x] `integer(8), dimension(:, :)`;
+    * [x] `real(4), dimension(:, :)`;
+    * [x] `real(8), dimension(:, :)`;
 
 <sub>Go to [Top](#top)</sub>
 
