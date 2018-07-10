@@ -59,6 +59,14 @@ module assert_mod
     module procedure assert_great_than_real4_array
     module procedure assert_great_than_real8_array
   end interface assert_great_than
+  
+  interface get_relative_difference
+    module procedure get_relative_difference_real4
+    module procedure get_relative_difference_real8
+  end interface
+  
+  real(8), parameter :: eps_default_kind8 = 1d-3
+  real(4), parameter :: eps_default_kind4 = 1e-3
 
 contains
     
@@ -580,49 +588,62 @@ contains
   
   end subroutine assert_equal_string_array
   
-  subroutine assert_approximate_real4(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real4(x, y, file_name, line_number, eps_user, suite)
 
     real(4), intent(in) :: x
     real(4), intent(in) :: y
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps
+    real(4), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
+    
+    real(4) :: eps
+    
+    eps = merge(eps_user, eps_default_kind4, present(eps_user))
 
-    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0e-10, present(eps)), to_string(x), to_string(y), file_name, line_number, suite)
+    call test_case_append_assert('=~', abs(x - y) / get_relative_difference(x, y) < eps, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real4
 
-  subroutine assert_approximate_real8(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real8(x, y, file_name, line_number, eps_user, suite)
 
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps
+    real(8), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
+    
+    real(8) :: eps
+    
+    eps = merge(eps_user, eps_default_kind8, present(eps_user))
 
-    call test_case_append_assert('=~', abs(x-y) < merge(eps, 1.0d-10, present(eps)), to_string(x), to_string(y), file_name, line_number, suite)
+    call test_case_append_assert('=~', abs(x - y) / get_relative_difference(x, y) < eps, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real8
 
-  subroutine assert_approximate_real4_vec(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real4_vec(x, y, file_name, line_number, eps_user, suite)
  
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps
+    real(4), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
+    real(4) :: eps
+    
+    eps = merge(eps_user, eps_default_kind8, present(eps_user))
 
     passed = .true.
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
-        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0e-10, present(eps))) then
+        if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+          if (get_relative_difference(x(i), y(i)) == 0.0D0) &
+            & cycle
           loc = i
           passed = .false.
           exit
@@ -634,23 +655,28 @@ contains
  
   end subroutine assert_approximate_real4_vec
 
-  subroutine assert_approximate_real8_vec(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real8_vec(x, y, file_name, line_number, eps_user, suite)
  
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps
+    real(8), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
+    real(8) :: eps
+    
+    eps = merge(eps_user, eps_default_kind8, present(eps_user))
     
     passed = .true.
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
-        if (.not. abs(x(i) - y(i)) < merge(eps, 1.0d-10, present(eps))) then
+        if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+          if (get_relative_difference(x(i), y(i)) == 0.0D0) &
+            & cycle
           loc = i
           passed = .false.
           exit
@@ -662,17 +688,20 @@ contains
  
   end subroutine assert_approximate_real8_vec
 
-  subroutine assert_approximate_real4_array(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real4_array(x, y, file_name, line_number, eps_user, suite)
  
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps
+    real(4), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
+    real(4) :: eps
+    
+    eps = merge(eps_user, eps_default_kind4, present(eps_user))
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -681,7 +710,9 @@ contains
       lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
-          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0e-10, present(eps))) then
+          if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+            if (get_relative_difference(x(i, j), y(i, j)) == 0.0D0) &
+              & cycle
             loc_i = i
             loc_j = j
             passed = .false.
@@ -695,17 +726,20 @@ contains
  
   end subroutine assert_approximate_real4_array
 
-  subroutine assert_approximate_real8_array(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real8_array(x, y, file_name, line_number, eps_user, suite)
  
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps
+    real(8), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
+    real(8) :: eps
+    
+    eps = merge(eps_user, eps_default_kind8, present(eps_user))
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -714,7 +748,9 @@ contains
       lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
-          if (.not. abs(x(i, j) - y(i, j)) < merge(eps, 1.0d-10, present(eps))) then
+          if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+            if (get_relative_difference(x(i, j), y(i, j)) == 0.0D0) &
+              & cycle
             loc_i = i
             loc_j = j
             passed = .false.
@@ -1203,5 +1239,65 @@ contains
     call test_case_append_assert('failure', .false., 'N/A', 'N/A', file_name, line_number, suite = suite)
 
   end subroutine assert_failure
+  
+  real(4) function get_relative_difference_real4(x, y, case)
+  
+    real(4), intent(in) :: x
+    real(4), intent(in) :: y
+    integer, optional, intent(in) :: case
+  
+    select case (merge(case, 1, present(case)))
+        
+    case (1)
+      get_relative_difference_real4 = max(abs(x), abs(y))
+        
+    case (2)
+      get_relative_difference_real4 = max(x, y)
+        
+    case (3)
+      get_relative_difference_real4 = min(abs(x), abs(y))
+        
+    case (4)
+      get_relative_difference_real4 = min(x, y)
+      
+    case (5)
+      get_relative_difference_real4 = (x + y) / 2
+      
+    case (6)
+      get_relative_difference_real4 = (abs(x) + abs(y)) / 2
+        
+    end select
+        
+  end function get_relative_difference_real4
+  
+  real(8) function get_relative_difference_real8(x, y, case)
+  
+    real(8), intent(in) :: x
+    real(8), intent(in) :: y
+    integer, optional, intent(in) :: case
+  
+    select case (merge(case, 1, present(case)))
+        
+    case (1)
+      get_relative_difference_real8 = max(abs(x), abs(y))
+        
+    case (2)
+      get_relative_difference_real8 = max(x, y)
+        
+    case (3)
+      get_relative_difference_real8 = min(abs(x), abs(y))
+        
+    case (4)
+      get_relative_difference_real8 = min(x, y)
+      
+    case (5)
+      get_relative_difference_real8 = (x + y) / 2
+      
+    case (6)
+      get_relative_difference_real8 = (abs(x) + abs(y)) / 2
+        
+    end select
+        
+  end function get_relative_difference_real8
 
 end module assert_mod
