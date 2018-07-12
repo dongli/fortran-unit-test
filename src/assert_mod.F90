@@ -597,11 +597,20 @@ contains
     real(4), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
+    logical :: passed
     real(4) :: eps
     
     eps = merge(eps_user, eps_default_kind4, present(eps_user))
+    
+    if (x == y) then
+      passed = .true.
+    else if (x == 0.0E0 .OR. y == 0.0E0) then
+	  passed = .not. abs(x - y) <  eps**2
+    else
+	  passed = .not. abs(x - y) / get_relative_difference(x, y) < eps
+    end if
 
-    call test_case_append_assert('=~', abs(x - y) / get_relative_difference(x, y) < eps, to_string(x), to_string(y), file_name, line_number, suite)
+    call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real4
 
@@ -614,11 +623,20 @@ contains
     real(8), intent(in), optional :: eps_user
     type(test_suite_type), intent(in), optional :: suite
     
+    logical :: passed
     real(8) :: eps
     
     eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    
+    if (x == y) then
+      passed = .true.
+    else if (x == 0.0D0 .OR. y == 0.0D0) then
+	  passed = .not. abs(x - y) <  eps**2
+    else
+	  passed = .not. abs(x - y) / get_relative_difference(x, y) < eps
+    end if
 
-    call test_case_append_assert('=~', abs(x - y) / get_relative_difference(x, y) < eps, to_string(x), to_string(y), file_name, line_number, suite)
+    call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real8
 
@@ -641,12 +659,24 @@ contains
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
-        if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
-          if (get_relative_difference(x(i), y(i)) == 0.0D0) &
-            & cycle
-          loc = i
-          passed = .false.
-          exit
+        if (x(i) == y(i)) then
+            cycle
+        else if (x(i) == 0.0E0 .OR. y(i) == 0.0E0) then
+            if (.not. abs(x(i) - y(i)) <  eps**2) then
+              loc = i
+              passed = .false.
+              exit
+            else
+              cycle
+            end if
+        else 
+          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+            loc = i
+            passed = .false.
+            exit
+          else
+              cycle
+          end if
         end if
       end do
     end if
@@ -674,12 +704,24 @@ contains
     loc = lbound(x, 1)
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
-        if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
-          if (get_relative_difference(x(i), y(i)) == 0.0D0) &
-            & cycle
-          loc = i
-          passed = .false.
-          exit
+        if (x(i) == y(i)) then
+            cycle
+        else if (x(i) == 0.0D0 .OR. y(i) == 0.0D0) then
+            if (.not. abs(x(i) - y(i)) <  eps**2) then
+              loc = i
+              passed = .false.
+              exit
+            else
+              cycle
+            end if
+        else 
+          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+            loc = i
+            passed = .false.
+            exit
+          else
+              cycle
+          end if
         end if
       end do
     end if
@@ -701,7 +743,7 @@ contains
     integer :: loc_i, loc_j, i, j
     real(4) :: eps
     
-    eps = merge(eps_user, eps_default_kind4, present(eps_user))
+    eps = merge(eps_user, eps_default_kind8, present(eps_user))
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -710,13 +752,26 @@ contains
       lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
-          if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
-            if (get_relative_difference(x(i, j), y(i, j)) == 0.0D0) &
-              & cycle
-            loc_i = i
-            loc_j = j
-            passed = .false.
-            exit
+          if (x(i, j) == y(i, j)) then
+              cycle
+          else if (x(i, j) == 0.0E0 .OR. y(i, j) == 0.0E0) then
+              if (.not. abs(x(i, j) - y(i, j)) <  eps**2) then
+                loc_i = i
+                loc_j = j
+                passed = .false.
+                exit
+              else
+                cycle
+              end if
+          else 
+            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+              loc_i = i
+              loc_j = j
+              passed = .false.
+              exit
+            else
+                cycle
+            end if
           end if
         end do
       end do
@@ -748,13 +803,26 @@ contains
       lbound(x, 2) == lbound(y, 2) .and. ubound(x, 2) == ubound(y, 2)) then
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
-          if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
-            if (get_relative_difference(x(i, j), y(i, j)) == 0.0D0) &
-              & cycle
-            loc_i = i
-            loc_j = j
-            passed = .false.
-            exit
+          if (x(i, j) == y(i, j)) then
+              cycle
+          else if (x(i, j) == 0.0D0 .OR. y(i, j) == 0.0D0) then
+              if (.not. abs(x(i, j) - y(i, j)) <  eps**2) then
+                loc_i = i
+                loc_j = j
+                passed = .false.
+                exit
+              else
+                cycle
+              end if
+          else 
+            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+              loc_i = i
+              loc_j = j
+              passed = .false.
+              exit
+            else
+                cycle
+            end if
           end if
         end do
       end do
@@ -1249,22 +1317,22 @@ contains
     select case (merge(case, 1, present(case)))
         
     case (1)
-      get_relative_difference_real4 = max(abs(x), abs(y))
+      get_relative_difference_real4 = abs(max(abs(x), abs(y)))
         
     case (2)
-      get_relative_difference_real4 = max(x, y)
+      get_relative_difference_real4 = abs(max(x, y))
         
     case (3)
-      get_relative_difference_real4 = min(abs(x), abs(y))
+      get_relative_difference_real4 = abs(min(abs(x), abs(y)))
         
     case (4)
-      get_relative_difference_real4 = min(x, y)
+      get_relative_difference_real4 = abs(min(x, y))
       
     case (5)
-      get_relative_difference_real4 = (x + y) / 2
+      get_relative_difference_real4 = abs((x + y) / 2)
       
     case (6)
-      get_relative_difference_real4 = (abs(x) + abs(y)) / 2
+      get_relative_difference_real4 = abs((abs(x) + abs(y)) / 2)
         
     end select
         
@@ -1279,22 +1347,22 @@ contains
     select case (merge(case, 1, present(case)))
         
     case (1)
-      get_relative_difference_real8 = max(abs(x), abs(y))
+      get_relative_difference_real8 = abs(max(abs(x), abs(y)))
         
     case (2)
-      get_relative_difference_real8 = max(x, y)
+      get_relative_difference_real8 = abs(max(x, y))
         
     case (3)
-      get_relative_difference_real8 = min(abs(x), abs(y))
+      get_relative_difference_real8 = abs(min(abs(x), abs(y)))
         
     case (4)
-      get_relative_difference_real8 = min(x, y)
+      get_relative_difference_real8 = abs(min(x, y))
       
     case (5)
-      get_relative_difference_real8 = (x + y) / 2
+      get_relative_difference_real8 = abs((x + y) / 2)
       
     case (6)
-      get_relative_difference_real8 = (abs(x) + abs(y)) / 2
+      get_relative_difference_real8 = abs((abs(x) + abs(y)) / 2)
         
     end select
         

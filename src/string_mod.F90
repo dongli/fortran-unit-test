@@ -81,14 +81,10 @@ contains
     else
       w = 4
     end if
-    write(fmt, "('(f', i0, '.', i0, ')')") w+1, w
+    write(fmt, "('(g', i0, '.', i0, ')')") w+6, w
     y = int(x)
-    write(tmp, fmt) abs(x-y)
-    if (x < y) then
-      res = '-' // trim(to_string(y)) // trim(tmp)
-    else
-      res = trim(to_string(y)) // trim(tmp)
-    end if
+    write(tmp, fmt) x
+    res = trim(tmp)
 
   end function real4_to_string
 
@@ -107,14 +103,10 @@ contains
     else
       w = 4
     end if
-    write(fmt, "('(f', i0, '.', i0, ')')") w+1, w
+    write(fmt, "('(g', i0, '.', i0, ')')") w+6, w
     y = int(x)
-    write(tmp, fmt) abs(x-y)
-    if (x < y) then
-      res = '-' // trim(to_string(y)) // trim(tmp)
-    else
-      res = trim(to_string(y)) // trim(tmp)
-    end if
+    write(tmp, fmt) x
+    res = trim(tmp)
 
   end function real8_to_string
 
