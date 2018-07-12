@@ -75,46 +75,46 @@ Output:
 ```txt
 ///////////////////// Report of Suite: Default test suite ///////////////////////
 
- -> Details:
- Test 1: 0 of 1 assertions succeed.
- Assertion #1 failed with reason: x (1.0000) =~ y (2.0000)
- Check line: test_assert.F90:13
-
-
- -> Summary:
- Default test suite: 0 of 1 assertions succeed.
+ +-> Details:
+ |   |
+ |   +-> Test 1: 1 of 1 assertions succeed.
+ |   |
+ |
+ +-> Summary:
+ |   +-> Default test suite: 1 of 1 assertions succeed.
 
 ////////////////////////////////////////////////////////////////////////////////
 
 
 //////// Report of Suite: my specific test suite, Case: Specific Test 2 /////////
 
- Specific Test 2: 0 of 1 assertions succeed.
-
- Assertion #1 failed with reason: x (1.0000) == y (2.0000)
- Check line: test_assert.F90:25
-
+ +-> Specific Test 2: 0 of 1 assertions succeed.
+ |   |
+ |   +-> Assertion #1 failed with reason: x ( 1.000) == y ( 2.000)
+ |   +-> Check line: test_assert.F90:29
 
 /////////////////// Report of Suite: my specific test suite /////////////////////
 
- -> Details:
- Specific Test 1: 0 of 1 assertions succeed.
- Assertion #1 failed with reason: x (1.0000) =~ y (2.0000)
- Check line: Unknown file:-1
-
- Specific Test 2: 0 of 1 assertions succeed.
- Assertion #1 failed with reason: x (1.0000) == y (2.0000)
- Check line: test_assert.F90:25
-
- Specific Test 3: 0 of 1 assertions succeed.
- Assertion #1 failed with reason: x (1.0000) =~ y (2.0000)
- Check line: test_assert.F90:28
-
-
- -> Summary:
- my specific test suite: 0 of 3 assertions succeed.
+ +-> Details:
+ |   |
+ |   +-> Specific Test 1: 1 of 1 assertions succeed.
+ |   |
+ |   +-> Specific Test 2: 0 of 1 assertions succeed.
+ |   |   |
+ |   |   +-> Assertion #1 failed with reason: x ( 1.000) == y ( 2.000)
+ |   |   +-> Check line: test_assert.F90:29
+ |   |
+ |   +-> Specific Test 3: 0 of 1 assertions succeed.
+ |   |   |
+ |   |   +-> Assertion #1 failed with reason: x ( 1.000) =~ y ( 2.000)
+ |   |   +-> Check line: test_assert.F90:32
+ |   |
+ |
+ +-> Summary:
+ |   +-> my specific test suite: 1 of 3 assertions succeed.
 
 ////////////////////////////////////////////////////////////////////////////////
+
 ```
 
 You can integrate this library into your CMake based project as:
