@@ -588,72 +588,70 @@ contains
   
   end subroutine assert_equal_string_array
   
-  subroutine assert_approximate_real4(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real4(x, y, file_name, line_number, eps, suite)
 
     real(4), intent(in) :: x
     real(4), intent(in) :: y
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps_user
+    real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
-    logical :: passed
-    real(4) :: eps
+    real(4) :: eps_
     
-    eps = merge(eps_user, eps_default_kind4, present(eps_user))
+    eps_ = merge(eps, eps_default_kind4, present(eps))
     
     if (x == y) then
       passed = .true.
     else if (x == 0.0E0 .OR. y == 0.0E0) then
-	  passed = .not. abs(x - y) <  eps**2
+      passed = .not. abs(x - y) <  eps_**2
     else
-	  passed = .not. abs(x - y) / get_relative_difference(x, y) < eps
+      passed = .not. abs(x - y) / get_relative_difference(x, y) < eps_
     end if
 
     call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real4
 
-  subroutine assert_approximate_real8(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real8(x, y, file_name, line_number, eps, suite)
 
     real(8), intent(in) :: x
     real(8), intent(in) :: y
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps_user
+    real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
-    logical :: passed
-    real(8) :: eps
+    real(8) :: eps_
     
-    eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    eps_ = merge(eps, eps_default_kind8, present(eps))
     
     if (x == y) then
       passed = .true.
     else if (x == 0.0D0 .OR. y == 0.0D0) then
-	  passed = .not. abs(x - y) <  eps**2
+      passed = .not. abs(x - y) <  eps_**2
     else
-	  passed = .not. abs(x - y) / get_relative_difference(x, y) < eps
+      passed = .not. abs(x - y) / get_relative_difference(x, y) < eps_
     end if
 
     call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
 
   end subroutine assert_approximate_real8
 
-  subroutine assert_approximate_real4_vec(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real4_vec(x, y, file_name, line_number, eps, suite)
  
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps_user
+    real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
-    real(4) :: eps
+    real(4) :: eps_
     
-    eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    eps_ = merge(eps, eps_default_kind4, present(eps))
 
     passed = .true.
     loc = lbound(x, 1)
@@ -662,7 +660,7 @@ contains
         if (x(i) == y(i)) then
             cycle
         else if (x(i) == 0.0E0 .OR. y(i) == 0.0E0) then
-            if (.not. abs(x(i) - y(i)) <  eps**2) then
+            if (.not. abs(x(i) - y(i)) <  eps_**2) then
               loc = i
               passed = .false.
               exit
@@ -670,7 +668,7 @@ contains
               cycle
             end if
         else 
-          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
             passed = .false.
             exit
@@ -685,20 +683,20 @@ contains
  
   end subroutine assert_approximate_real4_vec
 
-  subroutine assert_approximate_real8_vec(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real8_vec(x, y, file_name, line_number, eps, suite)
  
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps_user
+    real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc, i
-    real(8) :: eps
+    real(8) :: eps_
     
-    eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    eps_ = merge(eps, eps_default_kind8, present(eps))
     
     passed = .true.
     loc = lbound(x, 1)
@@ -707,7 +705,7 @@ contains
         if (x(i) == y(i)) then
             cycle
         else if (x(i) == 0.0D0 .OR. y(i) == 0.0D0) then
-            if (.not. abs(x(i) - y(i)) <  eps**2) then
+            if (.not. abs(x(i) - y(i)) <  eps_**2) then
               loc = i
               passed = .false.
               exit
@@ -715,7 +713,7 @@ contains
               cycle
             end if
         else 
-          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps) then
+          if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
             passed = .false.
             exit
@@ -730,18 +728,18 @@ contains
  
   end subroutine assert_approximate_real8_vec
 
-  subroutine assert_approximate_real4_array(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real4_array(x, y, file_name, line_number, eps, suite)
  
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(4), intent(in), optional :: eps_user
+    real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
-    real(4) :: eps
+    real(4) :: eps_
     
     eps = merge(eps_user, eps_default_kind8, present(eps_user))
     
@@ -755,7 +753,7 @@ contains
           if (x(i, j) == y(i, j)) then
               cycle
           else if (x(i, j) == 0.0E0 .OR. y(i, j) == 0.0E0) then
-              if (.not. abs(x(i, j) - y(i, j)) <  eps**2) then
+              if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
                 loc_i = i
                 loc_j = j
                 passed = .false.
@@ -764,7 +762,7 @@ contains
                 cycle
               end if
           else 
-            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
               passed = .false.
@@ -781,20 +779,20 @@ contains
  
   end subroutine assert_approximate_real4_array
 
-  subroutine assert_approximate_real8_array(x, y, file_name, line_number, eps_user, suite)
+  subroutine assert_approximate_real8_array(x, y, file_name, line_number, eps, suite)
  
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
-    real(8), intent(in), optional :: eps_user
+    real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
     logical :: passed
     integer :: loc_i, loc_j, i, j
-    real(8) :: eps
+    real(8) :: eps_
     
-    eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    eps_ = merge(eps, eps_default_kind8, present(eps))
     
     passed = .true.
     loc_i = lbound(x, 1)
@@ -806,7 +804,7 @@ contains
           if (x(i, j) == y(i, j)) then
               cycle
           else if (x(i, j) == 0.0D0 .OR. y(i, j) == 0.0D0) then
-              if (.not. abs(x(i, j) - y(i, j)) <  eps**2) then
+              if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
                 loc_i = i
                 loc_j = j
                 passed = .false.
@@ -815,7 +813,7 @@ contains
                 cycle
               end if
           else 
-            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps) then
+            if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
               passed = .false.
