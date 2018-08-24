@@ -597,6 +597,7 @@ contains
     real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
+    logical :: passed
     real(4) :: eps_
     
     eps_ = merge(eps, eps_default_kind4, present(eps))
@@ -604,9 +605,9 @@ contains
     if (x == y) then
       passed = .true.
     else if (x == 0.0E0 .OR. y == 0.0E0) then
-      passed = .not. abs(x - y) <  eps_**2
+      passed = abs(x - y) <  eps_**2
     else
-      passed = .not. abs(x - y) / get_relative_difference(x, y) < eps_
+      passed = abs(x - y) / get_relative_difference(x, y) < eps_
     end if
 
     call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
@@ -622,6 +623,7 @@ contains
     real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
     
+    logical :: passed
     real(8) :: eps_
     
     eps_ = merge(eps, eps_default_kind8, present(eps))
@@ -629,9 +631,9 @@ contains
     if (x == y) then
       passed = .true.
     else if (x == 0.0D0 .OR. y == 0.0D0) then
-      passed = .not. abs(x - y) <  eps_**2
+      passed = abs(x - y) <  eps_**2
     else
-      passed = .not. abs(x - y) / get_relative_difference(x, y) < eps_
+      passed = abs(x - y) / get_relative_difference(x, y) < eps_
     end if
 
     call test_case_append_assert('=~', passed, to_string(x), to_string(y), file_name, line_number, suite)
@@ -741,7 +743,7 @@ contains
     integer :: loc_i, loc_j, i, j
     real(4) :: eps_
     
-    eps = merge(eps_user, eps_default_kind8, present(eps_user))
+    eps_ = merge(eps, eps_default_kind8, present(eps))
     
     passed = .true.
     loc_i = lbound(x, 1)
