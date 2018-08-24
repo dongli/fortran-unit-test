@@ -675,7 +675,7 @@ contains
             passed = .false.
             exit
           else
-              cycle
+            cycle
           end if
         end if
       end do
@@ -720,7 +720,7 @@ contains
             passed = .false.
             exit
           else
-              cycle
+            cycle
           end if
         end if
       end do
@@ -770,7 +770,7 @@ contains
               passed = .false.
               exit
             else
-                cycle
+              cycle
             end if
           end if
         end do
@@ -821,7 +821,7 @@ contains
               passed = .false.
               exit
             else
-                cycle
+              cycle
             end if
           end if
         end do
