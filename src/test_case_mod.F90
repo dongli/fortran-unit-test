@@ -127,23 +127,22 @@ contains
     test_case => get_test_case(name, dummy_suite)
 
     call log_header(log_out_unit, 'Report of Suite: '//trim(dummy_suite%name)//', Case: '//trim(test_case%name))
-    write(log_out_unit, *) trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
+    write(log_out_unit, *) '+-> ' // trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
       trim(to_string(test_case%num_assert)) // ' assertions succeed.'
-    write(log_out_unit, *)
 
     assert_result => test_case%assert_result_head
     do while (associated(assert_result))
       if (.not. assert_result%passed) then
+          write(log_err_unit, *) '|   |'
         if (assert_result%right_operand /= '') then
-          write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+          write(log_err_unit, *) '|   +-> Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x (' // trim(assert_result%left_operand) // ') ' // trim(assert_result%assert_operator) // &
             ' y (' // trim(assert_result%right_operand) // ')'
-          write(log_err_unit, *) 'Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
+          write(log_err_unit, *) '|   +-> Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
         else
-          write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+          write(log_err_unit, *) '|   +-> Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
             'x is not ' // trim(assert_result%assert_operator) // '!'
         end if
-        write(log_err_unit, *)
       end if
       assert_result => assert_result%next
     end do
@@ -175,42 +174,45 @@ contains
   
     ! prints all test cases
     if (associated(dummy_suite%test_case_head)) then
-      write(log_out_unit, *) '-> Details:'
+      write(log_out_unit, *) '+-> Details:'
+      write(log_out_unit, *) '|   |'
     
       test_case => dummy_suite%test_case_head
       do while (associated(test_case))
         num_test_case = num_test_case + 1
       
-        write(log_out_unit, *) trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
+        write(log_out_unit, *) '|   +-> ' // trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
           trim(to_string(test_case%num_assert)) // ' assertions succeed.'
       
         num_all_succeed_assert = num_all_succeed_assert + test_case%num_succeed_assert
         num_all_assert = num_all_assert + test_case%num_assert
         
         assert_result => test_case%assert_result_head
+        
         do while (associated(assert_result))
           if (.not. assert_result%passed) then
+            write(log_err_unit, *) '|   |   |'
             if (assert_result%right_operand /= '') then
-              write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+              write(log_err_unit, *) '|   |   +-> Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
                 'x (' // trim(assert_result%left_operand) // ') ' // trim(assert_result%assert_operator) // &
                 ' y (' // trim(assert_result%right_operand) // ')'
-              write(log_err_unit, *) 'Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
+              write(log_err_unit, *) '|   |   +-> Check line: ', trim(assert_result%file_name), ':', trim(to_string(assert_result%line_number))
             else
-              write(log_err_unit, *) 'Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
+              write(log_err_unit, *) '|   |   +-> Assertion #' // trim(to_string(assert_result%id)) // ' failed with reason: ' // &
                 'x is not ' // trim(assert_result%assert_operator) // '!'
             end if
-            write(log_err_unit, *)
           end if
           assert_result => assert_result%next
         end do
             
         test_case => test_case%next
+        write(log_err_unit, *) '|   |'
       end do
     end if
   
-    write(log_out_unit, *)
-    write(log_out_unit, *) '-> Summary:'  
-    write(log_out_unit, *) trim(dummy_suite%name) // ': ', trim(to_string(num_all_succeed_assert)), ' of ' // &
+    write(log_out_unit, *) '|'
+    write(log_out_unit, *) '+-> Summary:'  
+    write(log_out_unit, *) '|   +-> ' // trim(dummy_suite%name) // ': ', trim(to_string(num_all_succeed_assert)), ' of ' // &
       trim(to_string(num_all_assert)) // ' assertions succeed.'
   
     call log_footer(log_out_unit)
