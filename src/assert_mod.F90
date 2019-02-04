@@ -284,11 +284,19 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc, i
+
+    if(all(x == y)) then
+=======
     
     logical passed
     integer loc, i
     
-    if(all(x == y)) then
+    if(all(x == y)) then 
+>>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -314,11 +322,19 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc, i
+
+    if (all(x == y)) then
+=======
     
     logical passed
     integer loc, i
     
-    if (all(x == y)) then
+    if (all(x == y)) then 
+>>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -376,11 +392,19 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc, i
+
+    if (all(x == y)) then
+=======
     
     logical passed
     integer loc, i
     
-    if (all(x == y)) then
+    if (all(x == y)) then 
+>>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -406,10 +430,17 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
     
+>>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -438,10 +469,17 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
     
+>>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -470,10 +508,17 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
     
+>>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -502,9 +547,15 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
+>>>>>>> pr/1
 
     passed = .true.
     loc_i = lbound(x, 1)
@@ -534,10 +585,17 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
     
+>>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -566,10 +624,17 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
+<<<<<<< HEAD
+
+    logical :: passed
+    integer :: loc_i, loc_j, i, j
+
+=======
     
     logical passed
     integer loc_i, loc_j, i, j
     
+>>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
