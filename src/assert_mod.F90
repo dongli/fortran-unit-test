@@ -170,19 +170,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -208,19 +200,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -246,19 +230,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -284,19 +260,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -322,19 +290,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if (all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if (all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -363,8 +323,6 @@ contains
 
     logical :: passed
     integer :: loc, i
-    logical passed
-    integer loc, i
 
     if (all(x == y)) then
       passed = .true.
@@ -392,19 +350,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if (all(x == y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if (all(x == y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -430,17 +380,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -469,17 +412,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -508,17 +444,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -547,15 +476,9 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
->>>>>>> pr/1
 
     passed = .true.
     loc_i = lbound(x, 1)
@@ -585,17 +508,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -624,17 +540,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -663,17 +572,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -703,17 +605,10 @@ contains
     integer, intent(in), optional :: line_number
     real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     real(4) :: eps_
 
-=======
-    
-    logical passed
-    real(4) eps_
-    
->>>>>>> pr/1
     eps_ = merge(eps, eps_default_kind4, present(eps))
 
     if (x == y) then
@@ -737,15 +632,9 @@ contains
     real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
 
-<<<<<<< HEAD
     logical :: passed
     real(8) :: eps_
 
-=======
-    logical passed
-    real(8) eps_
-    
->>>>>>> pr/1
     eps_ = merge(eps, eps_default_kind8, present(eps))
 
     if (x == y) then
@@ -768,19 +657,11 @@ contains
     integer, intent(in), optional :: line_number
     real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
     real(4) :: eps_
 
-=======
-    
-    logical passed
-    integer loc, i
-    real(4) eps_
-    
->>>>>>> pr/1
     eps_ = merge(eps, eps_default_kind4, present(eps))
 
     passed = .true.
@@ -789,9 +670,7 @@ contains
       do i = lbound(x, 1), ubound(x, 1)
         if (x(i) == y(i)) then
             cycle
-          cycle
         else if (x(i) == 0.0E0 .OR. y(i) == 0.0E0) then
-<<<<<<< HEAD
             if (.not. abs(x(i) - y(i)) <  eps_**2) then
               loc = i
               passed = .false.
@@ -800,16 +679,6 @@ contains
               cycle
             end if
         else
-=======
-          if (.not. abs(x(i) - y(i)) <  eps_**2) then
-            loc = i
-            passed = .false.
-            exit
-          else
-            cycle
-          end if
-        else 
->>>>>>> pr/1
           if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
             passed = .false.
@@ -833,19 +702,11 @@ contains
     integer, intent(in), optional :: line_number
     real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
     real(8) :: eps_
 
-=======
-    
-    logical passed
-    integer loc, i
-    real(8) eps_
-    
->>>>>>> pr/1
     eps_ = merge(eps, eps_default_kind8, present(eps))
 
     passed = .true.
@@ -854,9 +715,7 @@ contains
       do i = lbound(x, 1), ubound(x, 1)
         if (x(i) == y(i)) then
             cycle
-          cycle
         else if (x(i) == 0.0D0 .OR. y(i) == 0.0D0) then
-<<<<<<< HEAD
             if (.not. abs(x(i) - y(i)) <  eps_**2) then
               loc = i
               passed = .false.
@@ -865,16 +724,6 @@ contains
               cycle
             end if
         else
-=======
-          if (.not. abs(x(i) - y(i)) <  eps_**2) then
-            loc = i
-            passed = .false.
-            exit
-          else
-            cycle
-          end if
-        else 
->>>>>>> pr/1
           if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
             passed = .false.
@@ -898,7 +747,6 @@ contains
     integer, intent(in), optional :: line_number
     real(4), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
@@ -906,15 +754,6 @@ contains
 
     eps_ = merge(eps, eps_default_kind8, present(eps))
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    real(4) eps_
-    
-    eps_ = merge(eps, eps_default_kind4, present(eps))
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -924,9 +763,7 @@ contains
         do j = lbound(x, 2), ubound(x, 2)
           if (x(i, j) == y(i, j)) then
               cycle
-            cycle
           else if (x(i, j) == 0.0E0 .OR. y(i, j) == 0.0E0) then
-<<<<<<< HEAD
               if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
                 loc_i = i
                 loc_j = j
@@ -936,17 +773,6 @@ contains
                 cycle
               end if
           else
-=======
-            if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
-              loc_i = i
-              loc_j = j
-              passed = .false.
-              exit
-            else
-              cycle
-            end if
-          else 
->>>>>>> pr/1
             if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
@@ -972,19 +798,11 @@ contains
     integer, intent(in), optional :: line_number
     real(8), intent(in), optional :: eps
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
     real(8) :: eps_
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    real(8) eps_
-    
->>>>>>> pr/1
     eps_ = merge(eps, eps_default_kind8, present(eps))
 
     passed = .true.
@@ -996,9 +814,7 @@ contains
         do j = lbound(x, 2), ubound(x, 2)
           if (x(i, j) == y(i, j)) then
               cycle
-            cycle
           else if (x(i, j) == 0.0D0 .OR. y(i, j) == 0.0D0) then
-<<<<<<< HEAD
               if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
                 loc_i = i
                 loc_j = j
@@ -1008,17 +824,6 @@ contains
                 cycle
               end if
           else
-=======
-            if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
-              loc_i = i
-              loc_j = j
-              passed = .false.
-              exit
-            else
-              cycle
-            end if
-          else 
->>>>>>> pr/1
             if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
@@ -1115,19 +920,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1153,19 +950,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1191,19 +980,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1229,19 +1010,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1267,19 +1040,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1305,19 +1070,11 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc, i
 
     if(all(x > y)) then
-=======
-    
-    logical passed
-    integer loc, i
-    
-    if(all(x > y)) then 
->>>>>>> pr/1
       passed = .true.
       loc = lbound(x, 1)
     else
@@ -1343,17 +1100,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1382,17 +1132,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1421,17 +1164,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1460,17 +1196,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1499,17 +1228,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1538,17 +1260,10 @@ contains
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     type(test_suite_type), intent(in), optional :: suite
-<<<<<<< HEAD
 
     logical :: passed
     integer :: loc_i, loc_j, i, j
 
-=======
-    
-    logical passed
-    integer loc_i, loc_j, i, j
-    
->>>>>>> pr/1
     passed = .true.
     loc_i = lbound(x, 1)
     loc_j = lbound(x, 2)
@@ -1609,7 +1324,6 @@ contains
     integer, optional, intent(in) :: case
 
     select case (merge(case, 1, present(case)))
-<<<<<<< HEAD
 
     case (1)
       get_relative_difference_real4 = abs(max(abs(x), abs(y)))
@@ -1629,20 +1343,6 @@ contains
     case (6)
       get_relative_difference_real4 = abs((abs(x) + abs(y)) / 2)
 
-=======
-    case (1)
-      get_relative_difference_real4 = abs(max(abs(x), abs(y)))
-    case (2)
-      get_relative_difference_real4 = abs(max(x, y))
-    case (3)
-      get_relative_difference_real4 = abs(min(abs(x), abs(y)))
-    case (4)
-      get_relative_difference_real4 = abs(min(x, y))
-    case (5)
-      get_relative_difference_real4 = abs((x + y) / 2)
-    case (6)
-      get_relative_difference_real4 = abs((abs(x) + abs(y)) / 2)
->>>>>>> pr/1
     end select
 
   end function get_relative_difference_real4
@@ -1654,7 +1354,6 @@ contains
     integer, optional, intent(in) :: case
 
     select case (merge(case, 1, present(case)))
-<<<<<<< HEAD
 
     case (1)
       get_relative_difference_real8 = abs(max(abs(x), abs(y)))
@@ -1674,20 +1373,6 @@ contains
     case (6)
       get_relative_difference_real8 = abs((abs(x) + abs(y)) / 2)
 
-=======
-    case (1)
-      get_relative_difference_real8 = abs(max(abs(x), abs(y)))
-    case (2)
-      get_relative_difference_real8 = abs(max(x, y))
-    case (3)
-      get_relative_difference_real8 = abs(min(abs(x), abs(y)))
-    case (4)
-      get_relative_difference_real8 = abs(min(x, y))
-    case (5)
-      get_relative_difference_real8 = abs((x + y) / 2)
-    case (6)
-      get_relative_difference_real8 = abs((abs(x) + abs(y)) / 2)
->>>>>>> pr/1
     end select
 
   end function get_relative_difference_real8

@@ -5,7 +5,6 @@ module string_mod
   private
 
   public to_string
-  public pad_string
 
   interface to_string
     module procedure integer1_to_string
@@ -119,15 +118,5 @@ contains
     res = merge('true ', 'false', x)
 
   end function logical_to_string
-
-  function pad_string(x, w) result(res)
-
-    character(*), intent(in) :: x
-    integer, intent(in) :: w
-    character(w) res
-
-    res = x
-
-  end function pad_string
 
 end module string_mod
