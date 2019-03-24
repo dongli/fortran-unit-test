@@ -7,12 +7,12 @@ module test_case_mod
 
   private
 
-  public test_case_init
+  public test_suite_init
+  public test_suite_final
+  public test_suite_report
   public test_case_create
   public test_case_append_assert
   public test_case_report
-  public test_suite_report
-  public test_case_final
   public test_suite_type
 
   type assert_result_type
@@ -46,13 +46,15 @@ module test_case_mod
 
 contains
 
-  subroutine test_case_init()
+  subroutine test_suite_init(name)
 
-    default_test_suite%name = "Default test suite"
+    character(*), intent(in) :: name
 
-  end subroutine test_case_init
+    default_test_suite%name = name
 
-  subroutine test_case_final(suite)
+  end subroutine test_suite_init
+
+  subroutine test_suite_final(suite)
 
     type(test_suite_type), optional, target :: suite
     type(test_suite_type), pointer :: dummy_suite
@@ -81,7 +83,7 @@ contains
     end do
     nullify(dummy_suite%test_case_tail)
 
-  end subroutine test_case_final
+  end subroutine test_suite_final
 
   subroutine test_case_create(name, suite)
 

@@ -41,7 +41,7 @@ program test_assert
   call assert_approximate(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.01D0, 1.0D0, 1.0D0], [2, 2]), eps=0.01D0, suite=test_suite_approximate)
   
   call test_suite_report(test_suite_approximate)
-  call test_case_final(test_suite_approximate)
+  call test_suite_final(test_suite_approximate)
   
   ! test assert_false/_true routines
   test_suite_boolean%name = 'Boolean'
@@ -57,7 +57,7 @@ program test_assert
   call assert_true(.true., __FILE__, __LINE__, test_suite_boolean)
   
   call test_suite_report(test_suite_boolean)
-  call test_case_final(test_suite_boolean)
+  call test_suite_final(test_suite_boolean)
   
   ! test assert_equal routines
   test_suite_equal%name = 'Equal'
@@ -128,7 +128,7 @@ program test_assert
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), __FILE__, __LINE__, test_suite_equal)
   
   call test_suite_report(test_suite_equal)
-  call test_case_final(test_suite_equal)
+  call test_suite_final(test_suite_equal)
 
   ! test assert_great_than routines
   test_suite_great_than%name = 'great_then'
@@ -191,6 +191,6 @@ program test_assert
   call assert_great_than(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([0.0D0, 0.0D0, 0.0D0, 0.0D0], [2, 2]), __FILE__, __LINE__, test_suite_great_than)
 
   call test_suite_report(test_suite_great_than)
-  call test_case_final(test_suite_great_than)
+  call test_suite_final(test_suite_great_than)
 
 end program test_assert
