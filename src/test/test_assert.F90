@@ -42,7 +42,7 @@ program test_assert
   
   ! -> report
   call test_suite_report(test_suite_approximate)
-  call test_case_final(test_suite_approximate)
+  call test_suite_final(test_suite_approximate)
   
   ! assert_false/_true
   test_suite_boolean%name = 'Boolean'
@@ -59,7 +59,7 @@ program test_assert
   
   ! report
   call test_suite_report(test_suite_boolean)
-  call test_case_final(test_suite_boolean)
+  call test_suite_final(test_suite_boolean)
   
   ! assert_equal  
   test_suite_equal%name = 'Equal'
@@ -99,7 +99,7 @@ program test_assert
   call assert_equal(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), suite=test_suite_equal)
   
   call test_suite_report(test_suite_equal)
-  call test_case_final(test_suite_equal)
+  call test_suite_final(test_suite_equal)
 
   ! assert_great_than
   test_suite_great_than%name = 'great_then'
@@ -121,6 +121,6 @@ program test_assert
   
   ! report
   call test_suite_report(test_suite_great_than)
-  call test_case_final(test_suite_great_than)
+  call test_suite_final(test_suite_great_than)
 
 end program test_assert
