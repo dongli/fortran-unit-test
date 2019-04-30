@@ -7,7 +7,7 @@ module assert_mod
   implicit none
 
   private
-  
+
   public assert_equal
   public assert_approximate
   public assert_great_than
@@ -649,10 +649,11 @@ contains
 
   end subroutine assert_approximate_real8
 
-  subroutine assert_approximate_real4_vec(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real4_vec(x, y, z, file_name, line_number, eps, suite)
 
     real(4), intent(in) :: x(:)
     real(4), intent(in) :: y(:)
+    real(4), intent(out), optional :: z(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     real(4), intent(in), optional :: eps
@@ -669,15 +670,15 @@ contains
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
         if (x(i) == y(i)) then
-            cycle
+          cycle
         else if (x(i) == 0.0E0 .OR. y(i) == 0.0E0) then
-            if (.not. abs(x(i) - y(i)) <  eps_**2) then
-              loc = i
-              passed = .false.
-              exit
-            else
-              cycle
-            end if
+          if (.not. abs(x(i) - y(i)) <  eps_**2) then
+            loc = i
+            passed = .false.
+            exit
+          else
+            cycle
+          end if
         else
           if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
@@ -694,10 +695,11 @@ contains
 
   end subroutine assert_approximate_real4_vec
 
-  subroutine assert_approximate_real8_vec(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real8_vec(x, y, z, file_name, line_number, eps, suite)
 
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
+    real(8), intent(out) :: z(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     real(8), intent(in), optional :: eps
@@ -714,22 +716,42 @@ contains
     if (lbound(x, 1) == lbound(y, 1) .and. ubound(x, 1) == ubound(y, 1)) then
       do i = lbound(x, 1), ubound(x, 1)
         if (x(i) == y(i)) then
+          if (present(z)) then
+            z(i) = 0.0D0
+          else
             cycle
+          end if
         else if (x(i) == 0.0D0 .OR. y(i) == 0.0D0) then
-            if (.not. abs(x(i) - y(i)) <  eps_**2) then
-              loc = i
-              passed = .false.
+          if (.not. abs(x(i) - y(i)) <  eps_**2) then
+            loc = i
+            passed = .false.
+            if (present(z)) then
+              z(i) = abs(x(i) - y(i))
+            else
               exit
+            end if
+          else
+            if (present(z)) then
+              z(i) = abs(x(i) - y(i))
             else
               cycle
             end if
+          end if
         else
           if (.not. abs(x(i) - y(i)) / get_relative_difference(x(i), y(i)) < eps_) then
             loc = i
             passed = .false.
-            exit
+            if (present(z)) then
+              z(i) = abs(x(i) - y(i)) / get_relative_difference(x(i), y(i))
+            else
+              exit
+            end if
           else
-            cycle
+            if (present(z)) then
+              z(i) = abs(x(i) - y(i)) / get_relative_difference(x(i), y(i))
+            else
+              cycle
+            end if
           end if
         end if
       end do
@@ -739,10 +761,11 @@ contains
 
   end subroutine assert_approximate_real8_vec
 
-  subroutine assert_approximate_real4_array(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real4_array(x, y, z, file_name, line_number, eps, suite)
 
     real(4), intent(in) :: x(:, :)
     real(4), intent(in) :: y(:, :)
+    real(4), intent(out), optional :: z(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     real(4), intent(in), optional :: eps
@@ -762,24 +785,44 @@ contains
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
           if (x(i, j) == y(i, j)) then
+            if (present(z)) then
+              z(i, j) = 0.0E0
+            else
               cycle
+            end if
           else if (x(i, j) == 0.0E0 .OR. y(i, j) == 0.0E0) then
-              if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
-                loc_i = i
-                loc_j = j
-                passed = .false.
+            if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
+              loc_i = i
+              loc_j = j
+              passed = .false.
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j))
+              else
                 exit
+              end if
+            else
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j))
               else
                 cycle
               end if
+            end if
           else
             if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
               passed = .false.
-              exit
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j))
+              else
+                exit
+              end if
             else
-              cycle
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j))
+              else
+                cycle
+              end if
             end if
           end if
         end do
@@ -790,10 +833,11 @@ contains
 
   end subroutine assert_approximate_real4_array
 
-  subroutine assert_approximate_real8_array(x, y, file_name, line_number, eps, suite)
+  subroutine assert_approximate_real8_array(x, y, z, file_name, line_number, eps, suite)
 
     real(8), intent(in) :: x(:, :)
     real(8), intent(in) :: y(:, :)
+    real(8), intent(out), optional :: z(:, :)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     real(8), intent(in), optional :: eps
@@ -813,24 +857,44 @@ contains
       do i = lbound(x, 1), ubound(x, 1)
         do j = lbound(x, 2), ubound(x, 2)
           if (x(i, j) == y(i, j)) then
+            if (present(z)) then
+              z(i, j) = 0.0D0
+            else
               cycle
+            end if
           else if (x(i, j) == 0.0D0 .OR. y(i, j) == 0.0D0) then
-              if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
-                loc_i = i
-                loc_j = j
-                passed = .false.
+            if (.not. abs(x(i, j) - y(i, j)) <  eps_**2) then
+              loc_i = i
+              loc_j = j
+              passed = .false.
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j))
+              else
                 exit
+              end if
+            else
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j))
               else
                 cycle
               end if
+            end if
           else
             if (.not. abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j)) < eps_) then
               loc_i = i
               loc_j = j
               passed = .false.
-              exit
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j))
+              else
+                exit
+              end if
             else
-              cycle
+              if (present(z)) then
+                z(i, j) = abs(x(i, j) - y(i, j)) / get_relative_difference(x(i, j), y(i, j))
+              else
+                cycle
+              end if
             end if
           end if
         end do
