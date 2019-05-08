@@ -1,5 +1,6 @@
 program test_assert
   ! program to test assert routines
+  ! uneven assertions fail and even assertions pass
 
   use unit_test
   

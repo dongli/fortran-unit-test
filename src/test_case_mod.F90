@@ -150,9 +150,9 @@ contains
     end do
 
   end subroutine test_case_report
-  
+
   subroutine test_suite_report(suite)
-  
+
     type(test_suite_type), intent(in), optional, target :: suite
     type(test_suite_type), pointer :: dummy_suite
     type(test_case_type), pointer :: test_case
@@ -167,30 +167,30 @@ contains
     else
       dummy_suite => default_test_suite
     end if
-    
+
     call log_header(log_out_unit, 'Report of Suite: '//trim(dummy_suite%name))
-  
+
     num_test_case = 0
     num_all_succeed_assert = 0
     num_all_assert = 0
-  
+
     ! prints all test cases
     if (associated(dummy_suite%test_case_head)) then
       write(log_out_unit, *) '+-> Details:'
       write(log_out_unit, *) '|   |'
-    
+
       test_case => dummy_suite%test_case_head
       do while (associated(test_case))
         num_test_case = num_test_case + 1
-      
+
         write(log_out_unit, *) '|   +-> ' // trim(test_case%name) // ': ', trim(to_string(test_case%num_succeed_assert)), ' of ' // &
           trim(to_string(test_case%num_assert)) // ' assertions succeed.'
-      
+
         num_all_succeed_assert = num_all_succeed_assert + test_case%num_succeed_assert
         num_all_assert = num_all_assert + test_case%num_assert
-        
+
         assert_result => test_case%assert_result_head
-        
+
         do while (associated(assert_result))
           if (.not. assert_result%passed) then
             write(log_err_unit, *) '|   |   |'
@@ -206,19 +206,19 @@ contains
           end if
           assert_result => assert_result%next
         end do
-            
+
         test_case => test_case%next
         write(log_err_unit, *) '|   |'
       end do
     end if
-  
+
     write(log_out_unit, *) '|'
-    write(log_out_unit, *) '+-> Summary:'  
+    write(log_out_unit, *) '+-> Summary:'
     write(log_out_unit, *) '|   +-> ' // trim(dummy_suite%name) // ': ', trim(to_string(num_all_succeed_assert)), ' of ' // &
       trim(to_string(num_all_assert)) // ' assertions succeed.'
-  
+
     call log_footer(log_out_unit)
-    
+
   end subroutine test_suite_report
 
   subroutine test_case_append_assert(assert_operator, passed, left_operand, right_operand, file_name, line_number, suite)
@@ -239,6 +239,8 @@ contains
     else
       dummy_suite => default_test_suite
     end if
+
+    if (.not. associated(dummy_suite%test_case_tail)) call test_case_create('default')
 
     if (.not. associated(dummy_suite%test_case_tail%assert_result_head)) then
       allocate(dummy_suite%test_case_tail%assert_result_head)
