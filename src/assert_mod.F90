@@ -699,7 +699,7 @@ contains
 
     real(8), intent(in) :: x(:)
     real(8), intent(in) :: y(:)
-    real(8), intent(out) :: z(:)
+    real(8), intent(out), optional :: z(:)
     character(*), intent(in), optional :: file_name
     integer, intent(in), optional :: line_number
     real(8), intent(in), optional :: eps
