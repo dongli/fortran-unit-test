@@ -14,6 +14,7 @@ module test_case_mod
   public test_case_append_assert
   public test_case_report
   public test_suite_type
+  public test_suite_get_assert_results
 
   type assert_result_type
     integer id
@@ -46,11 +47,19 @@ module test_case_mod
 
 contains
 
-  subroutine test_suite_init(name)
+  subroutine test_suite_init(name, suite)
 
     character(*), intent(in) :: name
+    type(test_suite_type), intent(in), optional, target :: suite
+    type(test_suite_type), pointer :: dummy_suite
 
-    default_test_suite%name = name
+    if (present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+
+    dummy_suite%name = name
 
   end subroutine test_suite_init
 
@@ -88,7 +97,7 @@ contains
   subroutine test_case_create(name, suite)
 
     character(*), intent(in) :: name
-    type(test_suite_type), target, optional :: suite
+    type(test_suite_type), intent(in), target, optional :: suite
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
@@ -114,7 +123,7 @@ contains
   subroutine test_case_report(name, suite)
 
     character(*), intent(in) :: name
-    type(test_suite_type), optional, target :: suite
+    type(test_suite_type), intent(in), optional, target :: suite
     type(test_suite_type), pointer :: dummy_suite
     type(test_case_type), pointer :: test_case
     type(assert_result_type), pointer :: assert_result
@@ -265,8 +274,8 @@ contains
 
     integer i
     character(*), intent(in) :: name
-    type(test_case_type), pointer :: res
     type(test_suite_type), target, optional :: suite
+    type(test_case_type), pointer :: res
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
@@ -285,5 +294,47 @@ contains
     end do
 
   end function get_test_case
+
+  function test_suite_get_assert_results(suite) result(res)
+
+    type(test_suite_type), target, optional :: suite
+    logical, allocatable :: res(:)
+    type(test_suite_type), pointer :: dummy_suite
+    type(test_case_type), pointer :: dummy_case
+    type(assert_result_type), pointer :: dummy_assert_result
+    integer :: num_assert, i, j, k
+
+    ! if no suite parameter was passed, use default test suite
+    if (present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+
+    num_assert = 0
+    dummy_case => dummy_suite%test_case_head
+    num_assert = num_assert + dummy_case%num_assert
+    do i = 1, dummy_suite%num_test_case - 1
+      dummy_case => dummy_case%next
+      num_assert = num_assert + dummy_case%num_assert
+    end do
+
+    allocate(res(num_assert))
+    res = .FALSE.
+    dummy_case => dummy_suite%test_case_head
+    k = 0
+    do i = 1, dummy_suite%num_test_case
+      dummy_assert_result => dummy_case%assert_result_head
+      k = k + 1
+      res(k) = dummy_assert_result%passed
+      do j = 1, dummy_case%num_assert - 1
+        dummy_assert_result => dummy_assert_result%next
+        k = k + 1
+        res(k) = dummy_assert_result%passed
+      end do
+      dummy_case => dummy_case%next
+    end do
+
+  end function test_suite_get_assert_results
 
 end module test_case_mod
