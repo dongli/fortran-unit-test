@@ -47,11 +47,19 @@ module test_case_mod
 
 contains
 
-  subroutine test_suite_init(name)
+  subroutine test_suite_init(name, suite)
 
     character(*), intent(in) :: name
+    type(test_suite_type), intent(in), optional, target :: suite
+    type(test_suite_type), pointer :: dummy_suite
 
-    default_test_suite%name = name
+    if (present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+
+    dummy_suite%name = name
 
   end subroutine test_suite_init
 
@@ -89,7 +97,7 @@ contains
   subroutine test_case_create(name, suite)
 
     character(*), intent(in) :: name
-    type(test_suite_type), target, optional :: suite
+    type(test_suite_type), intent(in), target, optional :: suite
     type(test_suite_type), pointer :: dummy_suite
 
     ! if no suite parameter was passed, use default test suite
@@ -115,7 +123,7 @@ contains
   subroutine test_case_report(name, suite)
 
     character(*), intent(in) :: name
-    type(test_suite_type), optional, target :: suite
+    type(test_suite_type), intent(in), optional, target :: suite
     type(test_suite_type), pointer :: dummy_suite
     type(test_case_type), pointer :: test_case
     type(assert_result_type), pointer :: assert_result
