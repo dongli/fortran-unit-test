@@ -34,39 +34,43 @@ program good_test
   use unit_test
 
   implicit none
-  
-  type(test_suite_type)  specific_suite
-  
-  ! example with default suite
-  call test_case_init()
 
+  type(test_suite_type) :: specific_suite
+
+  ! example with default suite
+  call test_suite_init()
   call test_case_create('Test 1')
 
   ! By sending macros __FILE__ and __LINE__, report will print the file and line number where assertion fails.
   call assert_approximate(1.0, 2.0, __FILE__, __LINE__) ! line 14
 
+  ! report the complete suite
   call test_suite_report()
+
+  ! finalize
   call test_case_final()
-  
+
   ! example with specific suite
-  specific_suite%name = 'my specific test suite'
+  call test_suite_init('my specific test suite', specific_suite)
   call test_case_create('Specific Test 1', specific_suite)
   ! suite = SUITE need in this case (cause optional argument eps, file_name, line_number is missing)
   call assert_approximate(1.0, 2.0, suite=specific_suite)
-  
+
   call test_case_create('Specific Test 2', specific_suite)
   ! suite = SUITE need in this case (cause optional argument eps is missing)
   call assert_equal(1.0, 2.0, __FILE__, __LINE__,  suite=specific_suite)
-  
+
   call test_case_create('Specific Test 3', specific_suite)
   call assert_approximate(1.0, 2.0, __FILE__, __LINE__, 1E-0, specific_suite)
-  
+
   ! report a test_case
   call test_case_report('Specific Test 2', specific_suite)
-  
+
   ! report the complete suite
   call test_suite_report(specific_suite)
-  call test_case_final(specific_suite)
+
+  ! finalize
+  call test_suite_final(specific_suite)
 
 end program good_test
 ```
