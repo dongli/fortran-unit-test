@@ -775,7 +775,7 @@ contains
     integer :: loc_i, loc_j, i, j
     real(4) :: eps_
 
-    eps_ = merge(eps, eps_default_kind8, present(eps))
+    eps_ = merge(eps, eps_default_kind4, present(eps))
 
     passed = .true.
     loc_i = lbound(x, 1)
