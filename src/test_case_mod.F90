@@ -1,7 +1,7 @@
 module test_case_mod
 
   use log_mod
-  use string_mod
+  use simple_string_mod
 
   implicit none
 

@@ -1,7 +1,7 @@
 module assert_mod
 
   use log_mod
-  use string_mod
+  use simple_string_mod
   use test_case_mod
 
   implicit none

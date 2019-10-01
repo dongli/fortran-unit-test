@@ -1,4 +1,4 @@
-module string_mod
+module simple_string_mod
 
   implicit none
 
@@ -119,4 +119,4 @@ contains
 
   end function logical_to_string
 
-end module string_mod
+end module simple_string_mod
