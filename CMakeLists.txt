@@ -10,17 +10,19 @@ if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_Fortran_FLAGS "-ffree-line-length-none")
 elseif (CMAKE_Fortran_COMPILER_ID STREQUAL "PGI")
 endif ()
-set(CMAKE_Fortran_MODULE_DIRECTORY "${CMAKE_BINARY_DIR}")
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(sources
-  src/string_mod.F90
-  src/log_mod.F90
   src/assert_mod.F90
+  src/test_common_mod.F90
   src/test_case_mod.F90
+  src/test_suite_mod.F90
   src/unit_test.F90
 )
 
-if (PARENT_DIRECTORY)
+get_directory_property(has_parent PARENT_DIRECTORY)
+
+if (has_parent)
   include_directories(${CMAKE_BINARY_DIR})
 endif ()
 
@@ -28,11 +30,10 @@ add_library(fortran_unit_test SHARED ${sources})
 set_property(TARGET fortran_unit_test PROPERTY VERSION ${version})
 set_property(TARGET fortran_unit_test PROPERTY SOVERSION 1)
 
-add_executable(test_log src/test/test_log.F90)
-target_link_libraries(test_log fortran_unit_test)
-
-add_executable(test_assert src/test/test_assert.F90)
-target_link_libraries(test_assert fortran_unit_test)
+if (NOT has_parent)
+  add_executable(assert_test.exe src/assert_test.F90)
+  target_link_libraries(assert_test.exe fortran_unit_test)
+endif ()
 
 install(TARGETS fortran_unit_test EXPORT FortranUnitTestTargets
   ARCHIVE DESTINATION lib
