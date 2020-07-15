@@ -9,6 +9,9 @@ program test_assert
   type(test_suite_type) :: test_suite_equal
   type(test_suite_type) :: test_suite_great_than
 
+  logical, allocatable :: test_suite_assert_results(:)
+  logical, allocatable :: test_case_assert_results(:)
+
   ! test assert_approximate routines
   call test_suite_init('Approximate', test_suite_approximate)
 
@@ -190,6 +193,14 @@ program test_assert
   call assert_great_than(reshape([1.0, 1.0, 1.0, 1.0], [2, 2]), reshape([0.0, 0.0, 0.0, 0.0], [2, 2]), __FILE__, __LINE__, test_suite_great_than)
   call assert_great_than(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([0.0D0, 2.0D0, 0.0D0, 0.0D0], [2, 2]), __FILE__, __LINE__, test_suite_great_than)
   call assert_great_than(reshape([1.0D0, 1.0D0, 1.0D0, 1.0D0], [2, 2]), reshape([0.0D0, 0.0D0, 0.0D0, 0.0D0], [2, 2]), __FILE__, __LINE__, test_suite_great_than)
+
+  test_case_assert_results = test_case_get_assert_results('real', test_suite_great_than)
+  call assert_false(all(test_case_assert_results(1:12:2)), __FILE__, __LINE__, test_suite_great_than)
+  call assert_true(all(test_case_assert_results(2:12:2)), __FILE__, __LINE__, test_suite_great_than)
+
+  test_suite_assert_results = test_suite_get_assert_results(test_suite_great_than)
+  call assert_false(all(test_suite_assert_results(1:38:2)), __FILE__, __LINE__, test_suite_great_than)
+  call assert_true(all(test_suite_assert_results(2:38:2)), __FILE__, __LINE__, test_suite_great_than)
 
   call test_suite_report(test_suite_great_than)
   call test_suite_final(test_suite_great_than)
