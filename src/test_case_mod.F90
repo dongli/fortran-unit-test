@@ -9,6 +9,7 @@ module test_case_mod
   public test_case_create
   public test_case_append_assert
   public test_case_report
+  public test_case_get_assert_results
 
 contains
 
@@ -97,7 +98,7 @@ contains
       dummy_suite => default_test_suite
     end if
 
-    if (.not. associated(dummy_suite%test_case_tail)) call test_case_create('default')
+    if (.not. associated(dummy_suite%test_case_tail)) call test_case_create('default', dummy_suite)
 
     if (.not. associated(dummy_suite%test_case_tail%assert_result_head)) then
       allocate(dummy_suite%test_case_tail%assert_result_head)
@@ -142,5 +143,35 @@ contains
     end do
 
   end function get_test_case
+
+  function test_case_get_assert_results(name, suite) result(res)
+    implicit none
+
+    character(*), intent(in) :: name
+    type(test_suite_type), target, optional :: suite
+    logical, allocatable :: res(:)
+
+    type(test_suite_type), pointer :: dummy_suite
+    type(test_case_type), pointer :: dummy_case
+    type(assert_result_type), pointer :: dummy_assert_result
+
+    integer :: i
+
+    if (present(suite) ) then
+      dummy_suite => suite
+    else
+      dummy_suite => default_test_suite
+    end if
+
+    dummy_case => get_test_case(name, suite)
+    allocate(res(dummy_case%num_assert), source = .false.)
+
+    dummy_assert_result => dummy_case%assert_result_head
+    res(1) = dummy_assert_result%passed
+    do i = 1, dummy_case%num_assert - 1
+      dummy_assert_result => dummy_assert_result%next
+      res(i + 1) = dummy_assert_result%passed
+    end do
+  end function test_case_get_assert_results
 
 end module test_case_mod
