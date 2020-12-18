@@ -1,0 +1,10 @@
+name = "fortran-unit-test"
+version = "0.0.1"
+license = "MIT"
+author = "Li Dong"
+maintainer = "https://github.com/dongli"
+copyright = "Copyright (c) 2017 Li Dong"
+
+
+[library]
+source-dir="src"
