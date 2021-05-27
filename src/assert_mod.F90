@@ -398,6 +398,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -430,6 +432,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -462,6 +466,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -494,6 +500,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -526,6 +534,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -558,6 +568,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -590,6 +602,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('==', passed, x(loc_i, loc_j), y(loc_i, loc_j), file_name, line_number, suite)
@@ -688,6 +702,8 @@ contains
           end if
         end if
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)), file_name, line_number, suite)
@@ -754,6 +770,8 @@ contains
           end if
         end if
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('=~', passed, to_string(x(loc)), to_string(y(loc)), file_name, line_number, suite)
@@ -826,6 +844,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
@@ -898,6 +918,8 @@ contains
           end if
         end do
       end do
+    else
+      passed = .false.
     end if
 
     call test_case_append_assert('=~', passed, to_string(x(loc_i, loc_j)), to_string(y(loc_i, loc_j)), file_name, line_number, suite)
