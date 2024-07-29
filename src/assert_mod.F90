@@ -608,7 +608,11 @@ contains
     logical :: passed
     real(4) :: eps_
 
-    eps_ = merge(eps, eps_default_kind4, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind4
+    end if
 
     if (x == y) then
       passed = .true.
@@ -634,7 +638,11 @@ contains
     logical :: passed
     real(8) :: eps_
 
-    eps_ = merge(eps, eps_default_kind8, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind8
+    end if
 
     if (x == y) then
       passed = .true.
@@ -662,7 +670,11 @@ contains
     integer :: loc, i
     real(4) :: eps_
 
-    eps_ = merge(eps, eps_default_kind4, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind4
+    end if
 
     passed = .true.
     loc = lbound(x, 1)
@@ -708,7 +720,11 @@ contains
     integer :: loc, i
     real(8) :: eps_
 
-    eps_ = merge(eps, eps_default_kind8, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind8
+    end if
 
     passed = .true.
     loc = lbound(x, 1)
@@ -774,7 +790,11 @@ contains
     integer :: loc_i, loc_j, i, j
     real(4) :: eps_
 
-    eps_ = merge(eps, eps_default_kind4, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind4
+    end if
 
     passed = .true.
     loc_i = lbound(x, 1)
@@ -846,7 +866,11 @@ contains
     integer :: loc_i, loc_j, i, j
     real(8) :: eps_
 
-    eps_ = merge(eps, eps_default_kind8, present(eps))
+    if (present(eps)) then
+      eps_ = eps
+    else
+      eps_ = eps_default_kind8
+    end if
 
     passed = .true.
     loc_i = lbound(x, 1)
@@ -1386,7 +1410,15 @@ contains
     real(4), intent(in) :: y
     integer, optional, intent(in) :: case
 
-    select case (merge(case, 1, present(case)))
+    integer :: case_
+
+    if (present(case)) then
+      case_ = case
+    else
+      case_ = 1
+    end if
+    
+    select case (case_)
 
     case (1)
       get_relative_difference_real4 = abs(max(abs(x), abs(y)))
@@ -1416,7 +1448,15 @@ contains
     real(8), intent(in) :: y
     integer, optional, intent(in) :: case
 
-    select case (merge(case, 1, present(case)))
+    integer :: case_
+
+    if (present(case)) then
+      case_ = case
+    else
+      case_ = 1
+    end if
+
+    select case (case_)
 
     case (1)
       get_relative_difference_real8 = abs(max(abs(x), abs(y)))
